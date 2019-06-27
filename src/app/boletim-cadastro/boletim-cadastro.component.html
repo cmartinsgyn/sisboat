@@ -1,0 +1,215 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-success">
+                        <h4 class="card-title">Boletim de Acidente de Trânsito e de Ocorrência</h4>
+                        <p class="card-category">Preencha todos os campos</p>
+                    </div>
+                    <div class="card-body">
+                        <form #f="ngForm">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                  <mat-form-field class="full-width">
+                                     <input matInput name="codigoT" #codigoT="ngModel" type="number"
+                                     [(ngModel)]="boletim.codigo" placeholder="Código" disabled>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-sm-6">
+                                    <mat-form-field class="full-width">
+                                    <input matInput name="nomeT" #nomeT="ngModel" type="text" 
+                                    [(ngModel)]="pmsecao" placeholder="Pm Seção" disabled>
+                                    </mat-form-field>
+                                </div> 
+                                <div class="col-sm-4">
+                                    <mat-form-field class="full-width">
+                                    <input matInput name="dataT" #dataT="ngModel" type="text" 
+                                    [(ngModel)]="boletim.dataSys" placeholder="Data" disabled>  
+                                    </mat-form-field>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field class="full-width">
+                                      <input matInput placeholder="Nº Boletim" name="nboletimT"  type="number"
+                                      #nboletimT="ngModel" [(ngModel)]="boletim.nboletim" >
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                  <mat-form-field>
+                                    <mat-label>Tipo Boletim</mat-label>
+                                    <mat-select #tipoBoletimT value="boletim" (selectionChange)="triggerResize()">
+                                      <mat-option value="Boat">Boat</mat-option>
+                                      <mat-option value="Boc">Boc</mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </div>  
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <mat-label>Origem Boletim</mat-label>
+                                        <mat-select #origemBoletimT value="16px" (selectionChange)="triggerResize()">
+                                          <mat-option value="Rai">RAI</mat-option>
+                                          <mat-option value="Talonario">Talonário</mat-option>
+                                          <mat-option value="Talonario">Manual</mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <mat-form-field>
+                                        <input matInput [matDatepicker]="picker" placeholder="Data">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                      </mat-form-field>
+                                </div>
+                                <div class="col-md-2">
+                                  <mat-form-field class="full-width">
+                                    <input matInput placeholder="R.G Emissor BO" type="text">
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                  <mat-form-field class="full-width">
+                                    <input matInput type="text" disabled>
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field>
+                                        <mat-label>Status</mat-label>
+                                        <mat-select #statusT value="status" (selectionChange)="triggerResize()">
+                                          <mat-option value="Disponivel">Disponível</mat-option>
+                                          <mat-option value="Pendente">Pendente</mat-option>
+                                          <mat-option value="Resolvido">Resolvido</mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <mat-form-field>
+                                        <mat-label>Monta</mat-label>
+                                        <mat-select #montaT value="monta" (selectionChange)="triggerResize()">
+                                          <mat-option value="Pequena">Pequena</mat-option>
+                                          <mat-option value="Media">Média</mat-option>
+                                          <mat-option value="Grande">Grande</mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                </div>
+                                <div class="col-md-5">
+                                  <mat-form-field class="full-width">
+                                    <input matInput placeholder="Vítima" type="text">
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-5">
+                                  <mat-form-field class="full-width">
+                                    <input matInput placeholder="Autor" type="text">
+                                  </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                  <mat-form-field class="full-width">
+                                    <input matInput name="placaT" mask="9999" ng-model="placaT" placeholder="Placa" type="text">
+                                  </mat-form-field>
+                                </div>
+                               <div class="col-md-5">
+                                  <mat-form-field>
+                                      <mat-label>Municipio</mat-label>
+                                      <mat-select #municipioT value="municipio" (selectionChange)="triggerResize()">
+                                        <mat-option value="Anapolis">Anápolis</mat-option>
+                                        <mat-option value="Goiania">Goiânia</mat-option>
+                                        <mat-option value="Sao Luiz">São Luíz dos Montes Belos</mat-option>
+                                      </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-5">
+                                    <mat-form-field>
+                                        <mat-label>Barreira</mat-label>
+                                        <mat-select #barreiraT value="barreira" (selectionChange)="triggerResize()">
+                                          <mat-option value="Go020">GO20</mat-option>
+                                          <mat-option value="GO070">GO070</mat-option>
+                                          <mat-option value="Caldas Novas">Caldas Novas</mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-12">
+                                    <mat-form-field class="full-width">
+                                      <textarea matInput placeholder="Problema"></textarea>
+                                    </mat-form-field>
+                                  </div>
+                              </div>  
+                              <div class="row">
+                                  <div class="col-md-12">
+                                    <mat-form-field class="full-width">
+                                      <textarea matInput placeholder="Observação" ></textarea>
+                                    </mat-form-field>
+                                      
+                                  </div>
+                              </div>
+                              <button mat-raised-button type="submit" class="btn btn-success pull-right">Salvar</button>
+                              <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <!-- <div _ngcontent-exy-c48="" class="col-12 col-md-4 ng-star-inserted">
+      <div _ngcontent-exy-c48 _nghost-exy-c29 class="tc-contact">
+       
+          <div _ngcontent-exy-c29="" class="img-box ng-star-inserted">
+              <img _ngcontent-exy-c29="" alt="" height="400" width="400" src="../assets/img/logoPMGO.png">
+           </div>
+              <div  class="info-box">
+                  <h4 _ngcontent-exy-c29="" class="name">Mayank Jani</h4>
+                  <p _ngcontent-exy-c29="" class="role">Director</p>
+                
+                  <div _ngcontent-exy-c29="" class="social ng-star-inserted">
+                      
+                  </div>
+                  <p _ngcontent-exy-c29="" class="address">795 Folsom Ave, Suite 600 San Francisco, CADGE 94107</p>
+                
+              </div>
+          </div>
+      </div> -->
+
+
+  

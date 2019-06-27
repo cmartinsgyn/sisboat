@@ -1,0 +1,6 @@
+implementar
+ - Acabar os bind nos campos do forme boletim. 
+    - Formulário para lançamento de problems e soluções ao lado(tipo usuário)
+ - Menu e formulário para cadastro 
+ - Implentar parcialmente lista boletim
+ 
