@@ -1,9 +1,13 @@
-/* .alinha {
-    text-align:right;
-    @media(max-width:575px;){
-        text-align:left !important;
+.alinhaProv {
+       top: 254px;
+}
+
+@media(max-width:767px){
+   .alinha{
+       top:0px;
     }
-} */
+}
+
 
 
     

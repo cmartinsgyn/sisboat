@@ -1,6 +1,12 @@
 implementar
  - Acabar os bind nos campos do forme boletim. 
-    - Formulário para lançamento de problems e soluções ao lado(tipo usuário)
- - Menu e formulário para cadastro 
- - Implentar parcialmente lista boletim
+    - Formulário para lançamento de providencias ao lado(tipo usuário)
  
+ - Menu e formulário para cadastro de boletim
+    - fazer um atribuito n pra n providências
+ - Implentar parcialmente lista boletim
+  - formulario para impressão do boletim
+   R.N. : verificar se BO está liberado(verificar status do BO)
+   - salva os seguintes atribuitos em boletim: usuário, destinário, data, statusEmissão(no boletim)
+      sugerido fazer um atributo emissão n pra n em boletim / ou tabela separada
+- Lista de emissão de boletim

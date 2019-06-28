@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
 
+
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { UserProfileComponent } from '../../user-profile/user-profile.component';
@@ -24,6 +25,8 @@ import {
   MatNativeDateModule,
   MatSelectModule,
   DateAdapter,
+  MatTableModule,
+  MatPaginatorModule
 } from '@angular/material';
 
 @NgModule({
@@ -41,8 +44,9 @@ import {
     MatDatepickerModule,
     MatNativeDateModule,
     TextMaskModule,
-
-  ],
+    MatTableModule,
+    MatPaginatorModule
+    ],
 
   declarations: [
     DashboardComponent,
