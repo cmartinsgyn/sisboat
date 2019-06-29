@@ -8,8 +8,8 @@ import {MatTableDataSource} from '@angular/material/table';
   styleUrls: ['./table-list.component.css']
 })
 export class TableListComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  displayedColumns: string[] = ['codigo', 'name', 'weight', 'symbol', 'status', 'acoes'];
+  dataSource = new MatTableDataSource<Boletins>(LISTA);
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -18,32 +18,33 @@ export class TableListComponent implements OnInit {
   }
 }
 
-export interface PeriodicElement {
+export interface Boletins {
   name: string;
-  position: number;
+  codigo: number;
   weight: number;
   symbol: string;
+  status: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-  {position: 11, name: 'Sodium', weight: 22.9897, symbol: 'Na'},
-  {position: 12, name: 'Magnesium', weight: 24.305, symbol: 'Mg'},
-  {position: 13, name: 'Aluminum', weight: 26.9815, symbol: 'Al'},
-  {position: 14, name: 'Silicon', weight: 28.0855, symbol: 'Si'},
-  {position: 15, name: 'Phosphorus', weight: 30.9738, symbol: 'P'},
-  {position: 16, name: 'Sulfur', weight: 32.065, symbol: 'S'},
-  {position: 17, name: 'Chlorine', weight: 35.453, symbol: 'Cl'},
-  {position: 18, name: 'Argon', weight: 39.948, symbol: 'Ar'},
-  {position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K'},
-  {position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca'},
+const LISTA: Boletins[] = [
+  {codigo: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H', status: ''},
+  {codigo: 2, name: 'Helium', weight: 4.0026, symbol: 'He', status: ''},
+  {codigo: 3, name: 'Lithium', weight: 6.941, symbol: 'Li', status: ''},
+  {codigo: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be', status: 'Disponivel'},
+  {codigo: 5, name: 'Boron', weight: 10.811, symbol: 'B', status: 'Resolvido'},
+  {codigo: 6, name: 'Carbon', weight: 12.0107, symbol: 'C', status: 'Pendente'},
+  {codigo: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N', status: ''},
+  {codigo: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O', status: ''},
+  {codigo: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F', status: ''},
+  {codigo: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne', status: ''},
+  {codigo: 11, name: 'Sodium', weight: 22.9897, symbol: 'Na', status: ''},
+  {codigo: 12, name: 'Magnesium', weight: 24.305, symbol: 'Mg', status: ''},
+  {codigo: 13, name: 'Aluminum', weight: 26.9815, symbol: 'Al', status: ''},
+  {codigo: 14, name: 'Silicon', weight: 28.0855, symbol: 'Si', status: ''},
+  {codigo: 15, name: 'Phosphorus', weight: 30.9738, symbol: 'P', status: ''},
+  {codigo: 16, name: 'Sulfur', weight: 32.065, symbol: 'S', status: ''},
+  {codigo: 17, name: 'Chlorine', weight: 35.453, symbol: 'Cl', status: ''},
+  {codigo: 18, name: 'Argon', weight: 39.948, symbol: 'Ar', status: ''},
+  {codigo: 19, name: 'Potassium', weight: 39.0983, symbol: 'K', status: ''},
+  {codigo: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca', status: ''},
 ];
