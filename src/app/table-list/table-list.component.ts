@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-table-list',
@@ -11,12 +12,32 @@ export class TableListComponent implements OnInit {
   displayedColumns: string[] = ['codigo', 'weight', 'name', 'tipoOcorrencia', 'symbol', 'status', 'acoes'];
   dataSource = new MatTableDataSource<Boletins>(LISTA);
 
+  dados: string;
+
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
+    this.dados = 'dados do boletim';
   }
-}
+
+  constructor(public dialog: MatDialog) {}
+
+  openDialog() {
+    this.dialog.open(DialogDataExampleDialog, {
+      data: {
+        animal: 'panda'
+      }
+    });
+  }
+
+  buscaDadosBoletim() {
+    this.dados = 'dados do boletim';
+
+ }
+
+}// end class
 
 export class Boletins {
   name: string;
@@ -25,6 +46,9 @@ export class Boletins {
   tipoOcorrencia: string;
   symbol: string;
   status: string;
+}
+export interface DialogData {
+  animal: 'panda' | 'unicorn' | 'lion';
 }
 
 const LISTA: Boletins[] = [
@@ -49,3 +73,11 @@ const LISTA: Boletins[] = [
   {codigo: 19, name: 'Potassium', weight: 39.0983, tipoOcorrencia: 'Boat', symbol: 'K', status: ''},
   {codigo: 20, name: 'Calcium', weight: 40.078, tipoOcorrencia: 'Boat', symbol: 'Ca', status: ''},
 ];
+
+@Component({
+  selector: 'dialog-data-example-dialog',
+  templateUrl: 'dialog-data-example-dialog.html',
+})
+export class DialogDataExampleDialog {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+}
