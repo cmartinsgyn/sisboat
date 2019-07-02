@@ -8,7 +8,7 @@ import { BoletimCadastroComponent } from './../../boletim-cadastro/boletim-cadas
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { UserProfileComponent } from '../../user-profile/user-profile.component';
-import { TableListComponent, DialogDataExampleDialog } from '../../table-list/table-list.component';
+import { TableListComponent } from '../../table-list/table-list.component';
 import { TypographyComponent } from '../../typography/typography.component';
 import { IconsComponent } from '../../icons/icons.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
@@ -51,14 +51,11 @@ import {
     DashboardComponent,
     UserProfileComponent,
     TableListComponent,
-    DialogDataExampleDialog,
     TypographyComponent,
     IconsComponent,
     NotificationsComponent,
     BoletimCadastroComponent,
-    DialogDataExampleDialog
-
-  ],
+   ],
   providers: [
     { provide: DateAdapter, useClass: DateFormat },
     ],

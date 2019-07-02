@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
-import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-table-list',
@@ -9,33 +8,21 @@ import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
   styleUrls: ['./table-list.component.css']
 })
 export class TableListComponent implements OnInit {
-  displayedColumns: string[] = ['codigo', 'weight', 'name', 'tipoOcorrencia', 'symbol', 'status', 'acoes'];
+  displayedColumns: string[] = ['codigo', 'boletim', 'data', 'tipoOcorrencia', 'monta', 'status', 'acoes'];
   dataSource = new MatTableDataSource<Boletins>(LISTA);
 
   dados: string;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
-    this.dados = 'dados do boletim';
   }
 
-  constructor(public dialog: MatDialog) {}
-
-  openDialog() {
-// tslint:disable-next-line: no-use-before-declare
-    this.dialog.open(DialogDataExampleDialog, {
-      data: {
-        animal: 'panda'
-      }
-    });
-  }
+  constructor() {}
 
   buscaDadosBoletim() {
-    this.dados = 'dados do boletim';
-
+    this.dados = 'número: 12345'.concat('\n').concat('data: 02/07/19');
  }
 
 }// end class
@@ -47,9 +34,6 @@ export class Boletins {
   tipoOcorrencia: string;
   symbol: string;
   status: string;
-}
-export interface DialogData {
-  animal: 'panda' | 'unicorn' | 'lion';
 }
 
 const LISTA: Boletins[] = [
@@ -74,13 +58,3 @@ const LISTA: Boletins[] = [
   {codigo: 19, name: 'Potassium', weight: 39.0983, tipoOcorrencia: 'Boat', symbol: 'K', status: ''},
   {codigo: 20, name: 'Calcium', weight: 40.078, tipoOcorrencia: 'Boat', symbol: 'Ca', status: ''},
 ];
-
-@Component({
-  selector: 'app-dialog-data-example-dialog',
-  templateUrl: './dialog-data-example-dialog.html',
-  styleUrls: ['./table-list.component.css']
-})
-// tslint:disable-next-line: component-class-suffix
-export class DialogDataExampleDialog {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
-}
