@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-table-list',
@@ -25,6 +25,7 @@ export class TableListComponent implements OnInit {
   constructor(public dialog: MatDialog) {}
 
   openDialog() {
+// tslint:disable-next-line: no-use-before-declare
     this.dialog.open(DialogDataExampleDialog, {
       data: {
         animal: 'panda'
@@ -75,9 +76,11 @@ const LISTA: Boletins[] = [
 ];
 
 @Component({
-  selector: 'dialog-data-example-dialog',
-  templateUrl: 'dialog-data-example-dialog.html',
+  selector: 'app-dialog-data-example-dialog',
+  templateUrl: './dialog-data-example-dialog.html',
+  styleUrls: ['./table-list.component.css']
 })
+// tslint:disable-next-line: component-class-suffix
 export class DialogDataExampleDialog {
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 }

@@ -19,7 +19,6 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { BoletimCadastroComponent } from './boletim-cadastro/boletim-cadastro.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 
-
 @NgModule({
   imports: [
     BrowserAnimationsModule,
