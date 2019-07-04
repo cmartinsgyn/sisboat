@@ -9,11 +9,18 @@ import {MatTableDataSource} from '@angular/material/table';
 })
 export class TableListComponent implements OnInit {
   displayedColumns: string[] = ['codigo', 'boletim', 'data', 'tipoOcorrencia', 'monta', 'status', 'acoes'];
+// tslint:disable-next-line: no-use-before-declare
   dataSource = new MatTableDataSource<Boletins>(LISTA);
 
   dados: string;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;

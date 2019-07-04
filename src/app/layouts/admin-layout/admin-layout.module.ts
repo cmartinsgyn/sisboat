@@ -25,7 +25,8 @@ import {
   MatSelectModule,
   DateAdapter,
   MatTableModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatIconModule
 } from '@angular/material';
 
 @NgModule({
@@ -45,6 +46,7 @@ import {
     TextMaskModule,
     MatTableModule,
     MatPaginatorModule,
+    MatIconModule
     ],
 
   declarations: [
