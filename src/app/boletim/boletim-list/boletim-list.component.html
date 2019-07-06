@@ -8,7 +8,7 @@
                 </mat-form-field>
             </div>
     <div class="container-fluid">
-        <div class="row">
+        <div class="row" class="linha">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-danger">
@@ -16,7 +16,7 @@
                     </div>
                 
                     <div class="card-body">
-                     
+                        <div class="table-responsive">
                           <table mat-table [dataSource]="dataSource" class="table table-hover">
                               <!-- Código -->
                                 <ng-container matColumnDef="codigo">
@@ -28,13 +28,13 @@
                                 <!-- Boletim -->
                                 <ng-container matColumnDef="boletim">
                                         <th mat-header-cell *matHeaderCellDef>Nº Boletim</th>
-                                        <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+                                        <td mat-cell *matCellDef="let element"> {{element.boletim}} </td>
                                     </ng-container>
                             
                                 <!-- Data BO-->
                                 <ng-container matColumnDef="data">
                                         <th mat-header-cell *matHeaderCellDef> Data </th>
-                                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                                        <td mat-cell *matCellDef="let element"> {{element.data}} </td>
                                 </ng-container>
 
                                 <!-- tipoOcorrencia -->
@@ -46,7 +46,7 @@
                                 <!-- Monta -->
                                 <ng-container matColumnDef="monta">
                                     <th mat-header-cell *matHeaderCellDef> Monta </th>
-                                    <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+                                    <td mat-cell *matCellDef="let element"> {{element.monta}} </td>
                                 </ng-container>
 
                                 <!-- Status -->
@@ -71,6 +71,7 @@
                                 </table>
                             
                                 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                          </div>      
                       </div>
                     </div>
                 </div>

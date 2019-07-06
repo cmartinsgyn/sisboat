@@ -8,3 +8,12 @@
     text-align: left;
 
 }
+
+.linha {
+    margin-top: 40px !important;
+} 
+
+.card .card-body {
+    padding: 0.9375rem 10px !important;
+    position: relative !important;
+}
