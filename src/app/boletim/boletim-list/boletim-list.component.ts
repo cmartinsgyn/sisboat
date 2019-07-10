@@ -1,3 +1,4 @@
+import { element } from 'protractor';
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
@@ -31,6 +32,15 @@ export class BoletimListComponent implements OnInit {
   buscaDadosBoletim() {
     this.dados = 'número: 12345'.concat('\n').concat('data: 02/07/19');
  }
+
+ onEdit(codigo) {
+  //this.router.navigate(['editar', codigo], { relativeTo: this.route });
+  console.log(codigo);
+}
+
+onRemove(elemento) {
+ console.log(elemento)
+}
 
 }// end class
 

@@ -4,6 +4,7 @@ import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { UserProfileComponent } from '../../user/user-profile/user-profile.component';
 import { BoletimCadastroComponent } from '../../boletim/boletim-cadastro/boletim-cadastro.component';
 import { UserListComponent } from 'app/user/user-list/user-list.component';
+import { UserNewpasswordComponent } from 'app/user/user-newpassword/user-newpassword.component';
 import { BoletimListComponent } from '../../boletim/boletim-list/boletim-list.component';
 import { TypographyComponent } from '../../typography/typography.component';
 import { IconsComponent } from '../../icons/icons.component';
@@ -54,6 +55,7 @@ export const AdminLayoutRoutes: Routes = [
     // }
     { path: 'dashboard',      component: DashboardComponent },
     { path: 'user-profile',   component: UserProfileComponent },
+    { path: 'user-newpassword',   component: UserNewpasswordComponent },
     { path: 'boletim-list',     component: BoletimListComponent },
     { path: 'typography',     component: TypographyComponent },
     { path: 'icons',          component: IconsComponent },

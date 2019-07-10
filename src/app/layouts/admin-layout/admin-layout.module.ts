@@ -8,6 +8,7 @@ import { BoletimCadastroComponent } from '../../boletim/boletim-cadastro/boletim
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { UserProfileComponent } from '../../user/user-profile/user-profile.component';
+import { UserNewpasswordComponent } from 'app/user/user-newpassword/user-newpassword.component';
 import { UserListComponent } from 'app/user/user-list/user-list.component';
 import { BoletimListComponent } from '../../boletim/boletim-list/boletim-list.component';
 import { TypographyComponent } from '../../typography/typography.component';
@@ -27,7 +28,8 @@ import {
   DateAdapter,
   MatTableModule,
   MatPaginatorModule,
-  MatIconModule
+  MatIconModule,
+  MatCardModule,
 } from '@angular/material';
 
 @NgModule({
@@ -47,7 +49,8 @@ import {
     TextMaskModule,
     MatTableModule,
     MatPaginatorModule,
-    MatIconModule
+    MatIconModule,
+    MatCardModule
     ],
 
   declarations: [
@@ -58,7 +61,8 @@ import {
     IconsComponent,
     NotificationsComponent,
     BoletimCadastroComponent,
-    UserListComponent
+    UserListComponent,
+    UserNewpasswordComponent
    ],
   providers: [
     { provide: DateAdapter, useClass: DateFormat },
