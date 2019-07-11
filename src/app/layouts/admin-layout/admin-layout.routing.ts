@@ -9,6 +9,7 @@ import { BoletimListComponent } from '../../boletim/boletim-list/boletim-list.co
 import { TypographyComponent } from '../../typography/typography.component';
 import { IconsComponent } from '../../icons/icons.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
+import { OrigemBoletimComponent } from 'app/cadastros/origem-boletim/origem-boletim.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -53,13 +54,14 @@ export const AdminLayoutRoutes: Routes = [
     //         component: UpgradeComponent
     //     }]
     // }
-    { path: 'dashboard',      component: DashboardComponent },
-    { path: 'user-profile',   component: UserProfileComponent },
-    { path: 'user-newpassword',   component: UserNewpasswordComponent },
+    { path: 'home',      component: DashboardComponent },
+    { path: 'usuario-cadastro',   component: UserProfileComponent },
+    { path: 'usuario-list',     component: UserListComponent },
+    { path: 'novasenha',   component: UserNewpasswordComponent },
+    { path: 'boletim-cadastro',        component: BoletimCadastroComponent },
     { path: 'boletim-list',     component: BoletimListComponent },
+    { path: 'cadastro-origem-boletim',  component: OrigemBoletimComponent  },
     { path: 'typography',     component: TypographyComponent },
     { path: 'icons',          component: IconsComponent },
     { path: 'notifications',  component: NotificationsComponent },
-    { path: 'boletim-cadastro',        component: BoletimCadastroComponent },
-    { path: 'user-list',     component: UserListComponent }
 ];

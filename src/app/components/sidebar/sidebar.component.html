@@ -56,12 +56,26 @@
     </ul>
   <!-- Menu geral   -->
   </div>
-    <ul class="nav" style="background-color: transparent">
+     <ul class="nav" style="background-color: transparent">
         <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
             <a class="nav-link" [routerLink]="[menuItem.path]">
                 <i class="material-icons">{{menuItem.icon}}</i>
                 <p>{{menuItem.title}}</p>
             </a>
         </li>
+        <li>
+            <a class="nav-link ">
+              <i class="material-icons">content_paste</i>   
+              <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Personal data
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      Type your name and age
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+            </a>    
+        </li>
     </ul>
+    
 </div>

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-class Boletim{
+class Boletim {
   codigo: any;
   rg: string;
   nome: string;
@@ -14,7 +14,8 @@ class Boletim{
   styleUrls: ['./boletim-cadastro.component.css']
 })
 export class BoletimCadastroComponent implements OnInit {
-  placa = new RegExp('[a-zA-Z]{3}[0-9]{4}');
+ placa = new RegExp('[a-zA-Z]{3}[0-9]{4}');
+ checked = false;
  myModel: any;
  pmsecao: any;
  boletim = new Boletim();

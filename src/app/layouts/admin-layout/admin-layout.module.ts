@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 import { BoletimCadastroComponent } from '../../boletim/boletim-cadastro/boletim-cadastro.component';
 import { AdminLayoutRoutes } from './admin-layout.routing';
@@ -14,6 +15,7 @@ import { BoletimListComponent } from '../../boletim/boletim-list/boletim-list.co
 import { TypographyComponent } from '../../typography/typography.component';
 import { IconsComponent } from '../../icons/icons.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
+import { OrigemBoletimComponent } from 'app/cadastros/origem-boletim/origem-boletim.component';
 
 import { DateFormat } from '../admin-layout/date-format';
 import {
@@ -29,8 +31,12 @@ import {
   MatTableModule,
   MatPaginatorModule,
   MatIconModule,
-  MatCardModule,
+  MatCardModule
+  ,
 } from '@angular/material';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatMenuModule} from '@angular/material/menu';
+
 
 @NgModule({
   imports: [
@@ -50,7 +56,11 @@ import {
     MatTableModule,
     MatPaginatorModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatCheckboxModule,
+    MatExpansionModule,
+    MatMenuModule
+
     ],
 
   declarations: [
@@ -62,7 +72,8 @@ import {
     NotificationsComponent,
     BoletimCadastroComponent,
     UserListComponent,
-    UserNewpasswordComponent
+    UserNewpasswordComponent,
+    OrigemBoletimComponent
    ],
   providers: [
     { provide: DateAdapter, useClass: DateFormat },

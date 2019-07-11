@@ -8,7 +8,7 @@
                       <p class="card-category"></p>
                   </div>
                   <div class="card-body">
-                      <form>
+                      <form [formGroup]="form">
                           <div class="row">
                             <div class="col-sm-2">
                               <mat-form-field class="full-width">
@@ -55,6 +55,22 @@
                                   <input matInput placeholder="Endereço" type="text">
                                 </mat-form-field>
                               </div>
+                          </div>
+                          <div class="row senha">
+                            <div class="col-md-2"></div>
+                              <mat-form-field>
+                                <input matInput placeholder="Digite sua senha" [type]="hide ? 'password' : 'text'" formControlName="password">
+                                <mat-error *ngIf="form.controls['password'].invalid">Senha é obrigatória</mat-error>
+                              </mat-form-field>
+                            <div class="col-md-1"></div>
+                              <mat-form-field>
+                                <input matInput placeholder="Confirme sua senha" [type]="hide ? 'password' : 'text'" formControlName="confirmPassword">
+                                <mat-error *ngIf="form.controls['confirmPassword'].pristine || form.controls['confirmPassword'].errors?.MatchPassword">
+                                  Senha não é igual</mat-error>
+                                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Esconder senha'" [attr.aria-pressed]="hide">
+                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                </button>
+                              </mat-form-field>
                           </div>
                           
                           <button mat-raised-button type="submit" class="btn btn-danger pull-right">Salvar</button>
