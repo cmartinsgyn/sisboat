@@ -32,8 +32,8 @@ import {
   MatPaginatorModule,
   MatIconModule,
   MatCardModule
-  ,
 } from '@angular/material';
+
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatMenuModule} from '@angular/material/menu';
 
@@ -43,7 +43,6 @@ import {MatMenuModule} from '@angular/material/menu';
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
-    ReactiveFormsModule,
     MatButtonModule,
     MatRippleModule,
     MatFormFieldModule,
@@ -59,7 +58,8 @@ import {MatMenuModule} from '@angular/material/menu';
     MatCardModule,
     MatCheckboxModule,
     MatExpansionModule,
-    MatMenuModule
+    MatMenuModule,
+    ReactiveFormsModule
 
     ],
 
@@ -76,8 +76,9 @@ import {MatMenuModule} from '@angular/material/menu';
     OrigemBoletimComponent
    ],
   providers: [
-    { provide: DateAdapter, useClass: DateFormat },
+    { provide: DateAdapter, useClass: DateFormat},
     ],
+
 })
 
 export class AdminLayoutModule {
