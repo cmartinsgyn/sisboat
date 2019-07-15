@@ -1,12 +1,14 @@
 <div class="main-content">
         <div class="header col-md-5">
+                
                 <mat-form-field>
                     <input matInput #filter (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
                     <button mat-icon-button matSuffix aria-label="clear" *ngIf="filter.value" (click)="filter.value=''; applyFilter('');">
                         <mat-icon>close</mat-icon>
                     </button>
-                </mat-form-field>
-            </div>
+                    <mat-icon matSuffix aria-label="clear" *ngIf="!filter.value">search</mat-icon>
+                </mat-form-field>       
+        </div>
     <div class="container-fluid">
         <div class="row" class="linha">
             <div class="col-md-12">

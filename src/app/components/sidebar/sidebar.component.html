@@ -65,12 +65,15 @@
         </li>
         <li class="nav-item" routerLinkActive="active" class="nav-item">
                 <a class="nav-link">
-                  <i class="material-icons">content_paste</i>
-                  <button mat-button [matMenuTriggerFor]="menu">Cadastros</button>
-                  <mat-menu #menu="matMenu" style="background: none !important">
-                    <button mat-menu-item routerLinkActive="active" [routerLink]="['/cadastro-origem-boletim']">Origem Boletim</button>
-                    <button mat-menu-item>Item 2</button>
-                  </mat-menu>   
+                  <i class="material-icons">content_paste</i>   
+                  <button mat-button [matMenuTriggerFor]="menu" class="btnMenuCss">Cadastros</button>
+               
+                  <mat-menu #menu="matMenu">    
+                    <button mat-menu-item routerLinkActive="active" [routerLink]="['/cadastro-origem-boletim']"
+                    class="plMenuCSS">- Origem Boletim </button>
+                    <button mat-menu-item routerLinkActive="active" [routerLink]="['/cadastro-origem-boletim']"
+                    class="plMenuCSS">- Graduação </button>
+                  </mat-menu>
                 </a>    
         </li>
      </ul>
