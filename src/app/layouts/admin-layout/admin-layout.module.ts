@@ -31,19 +31,20 @@ import {
   MatTableModule,
   MatPaginatorModule,
   MatIconModule,
-  MatCardModule
+  MatCardModule,
+  MatToolbarModule
 } from '@angular/material';
 
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatMenuModule} from '@angular/material/menu';
-
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
-    CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
     MatButtonModule,
+    CommonModule,
     MatRippleModule,
     MatFormFieldModule,
     MatInputModule,
@@ -52,6 +53,7 @@ import {MatMenuModule} from '@angular/material/menu';
     MatDatepickerModule,
     MatNativeDateModule,
     TextMaskModule,
+    MatToolbarModule,
     MatTableModule,
     MatPaginatorModule,
     MatIconModule,
