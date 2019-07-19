@@ -32,7 +32,8 @@ import {
   MatPaginatorModule,
   MatIconModule,
   MatCardModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatGridListModule
 } from '@angular/material';
 
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -61,6 +62,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     MatCheckboxModule,
     MatExpansionModule,
     MatMenuModule,
+    MatGridListModule,
     ReactiveFormsModule
 
     ],

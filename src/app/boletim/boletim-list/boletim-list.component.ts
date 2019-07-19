@@ -11,16 +11,17 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   styleUrls: ['./boletim-list.component.css'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({ height: '0px', minHeight: '0', visibility: 'hidden' })),
-      state('expanded', style({ height: '*', visibility: 'visible' })),
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
 })
 export class BoletimListComponent implements OnInit {
   displayedColumns: string[] = ['codigo', 'boletim', 'data', 'tipoOcorrencia', 'monta', 'status', 'acoes'];
-// tslint:disable-next-line: no-use-before-declare
-  dataSource =  new ExampleDataSource(); // new MatTableDataSource<Boletins>(LISTA);
+  // tslint:disable-next-line: no-use-before-declare
+  dataSource =  new MatTableDataSource<Boletins>(LISTA);
+  expandedElement: Boletins | null;
   dados: string;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -28,11 +29,11 @@ export class BoletimListComponent implements OnInit {
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    // this.dataSource.filter = filterValue;
+    this.dataSource.filter = filterValue;
   }
 
   ngOnInit() {
-   // this.dataSource.paginator = this.paginator;
+    this.dataSource.paginator = this.paginator;
   }
 
   constructor() {}
@@ -49,11 +50,6 @@ export class BoletimListComponent implements OnInit {
 onRemove(elemento) {
  console.log(elemento)
 }
-
-isExpansionDetailRow = (i: number, row: Object) => row.hasOwnProperty('detailRow');
-// tslint:disable-next-line: member-ordering
-expandedElement: any;
-
 
 }// end class
 
@@ -88,16 +84,3 @@ const LISTA: Boletins[] = [
   {codigo: 19, data: '05/07/2019', boletim: 390983, tipoOcorrencia: 'Boat', monta: 'Grande', status: 'Pendente'},
   {codigo: 20, data: '05/07/2019', boletim: 400780, tipoOcorrencia: 'Boat', monta: 'Pequena', status: 'Disponivel'},
 ];
-
-
-export class ExampleDataSource extends DataSource<any> {
-  /** Connect function called by the table to retrieve one stream containing the data to render. */
-  connect(): Observable<Boletins[]> {
-    const rows = [];
-    LISTA.forEach(element => rows.push(element, { detailRow: true, element }));
-    console.log(rows);
-    return of(rows);
-  }
-
-  disconnect() { }
-}
