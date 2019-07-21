@@ -11,7 +11,7 @@ import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { UserProfileComponent } from '../../user/user-profile/user-profile.component';
 import { UserNewpasswordComponent } from 'app/user/user-newpassword/user-newpassword.component';
 import { UserListComponent } from 'app/user/user-list/user-list.component';
-import { BoletimListComponent } from '../../boletim/boletim-list/boletim-list.component';
+import { BoletimListComponent, ConfirmaExclusaoDialog } from '../../boletim/boletim-list/boletim-list.component';
 import { TypographyComponent } from '../../typography/typography.component';
 import { IconsComponent } from '../../icons/icons.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
@@ -33,12 +33,12 @@ import {
   MatIconModule,
   MatCardModule,
   MatToolbarModule,
-  MatGridListModule
+  MatGridListModule,
+  MatDialogModule
 } from '@angular/material';
 
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatMenuModule} from '@angular/material/menu';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
@@ -63,9 +63,11 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     MatExpansionModule,
     MatMenuModule,
     MatGridListModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule
 
     ],
+    entryComponents: [ConfirmaExclusaoDialog],
 
   declarations: [
     DashboardComponent,
@@ -77,7 +79,9 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     BoletimCadastroComponent,
     UserListComponent,
     UserNewpasswordComponent,
-    OrigemBoletimComponent
+    OrigemBoletimComponent,
+    ConfirmaExclusaoDialog
+
    ],
   providers: [
     { provide: DateAdapter, useClass: DateFormat},

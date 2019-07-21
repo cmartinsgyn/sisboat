@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { DataSource } from '@angular/cdk/collections';
-import { Observable, of } from 'rxjs';
+import { element } from 'protractor';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-boletim-list',
@@ -23,6 +24,7 @@ export class BoletimListComponent implements OnInit {
   dataSource =  new MatTableDataSource<Boletins>(LISTA);
   expandedElement: Boletins | null;
   dados: string;
+  exclui: boolean;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -33,23 +35,33 @@ export class BoletimListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.title.setTitle('Lista de Boletins');
     this.dataSource.paginator = this.paginator;
   }
 
-  constructor() {}
+  constructor(
+    private title: Title,
+    public dialog: MatDialog,
+  ) { }
 
-  buscaDadosBoletim() {
-    this.dados = 'número: 12345'.concat('\n').concat('data: 02/07/19');
- }
+  openDialog(elemento: any): void {
+    // tslint:disable-next-line: no-use-before-declare
+    const dialogRef = this.dialog.open(ConfirmaExclusaoDialog, {
+      width: '350px'
+    });
 
- onEdit(codigo) {
-  // this.router.navigate(['editar', codigo], { relativeTo: this.route });
-  console.log(codigo);
-}
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        console.log(true)
+        this.excluir(elemento);
+      }
+    });
+  }
 
-onRemove(elemento) {
- console.log(elemento)
-}
+  excluir(elemento: any) {
+    console.log('Serviço Excluir item código ' + elemento.codigo);
+
+  }
 
 }// end class
 
@@ -61,6 +73,25 @@ export class Boletins {
   monta: string;
   status: string;
 }
+
+/*Confirmação de exclusão*/
+@Component({
+  // tslint:disable-next-line: component-selector
+  selector: 'confirma-exclusao-dialog',
+  templateUrl: 'confirma-exclusao.html',
+})
+// tslint:disable-next-line: component-class-suffix
+export class ConfirmaExclusaoDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<ConfirmaExclusaoDialog>
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+}
+
 
 const LISTA: Boletins[] = [
   {codigo: 1, data: '05/07/2019', boletim: 100791, tipoOcorrencia: 'Boat', monta: 'Pequena', status: 'Disponivel'},
@@ -84,3 +115,4 @@ const LISTA: Boletins[] = [
   {codigo: 19, data: '05/07/2019', boletim: 390983, tipoOcorrencia: 'Boat', monta: 'Grande', status: 'Pendente'},
   {codigo: 20, data: '05/07/2019', boletim: 400780, tipoOcorrencia: 'Boat', monta: 'Pequena', status: 'Disponivel'},
 ];
+

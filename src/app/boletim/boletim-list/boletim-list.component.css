@@ -1,65 +1,38 @@
-::ng-deep .mat-tooltip {
-    /* tooltip dados */ 
-    /* e.g. */
-    background-color: white;
-    color:black;
-    font-size: 12px;
-    width: 300px;
-    text-align: left;
-
-}
-
 .linha {
     margin-top: 40px !important;
 } 
-
-.card .card-body {
-    padding: 0.9375rem 10px !important;
-    position: relative !important;
-}
 
   table {
     width: 100%;
   }
   
-  tr.example-detail-row {
+  tr.detail-row {
     height: 0;
   }
   
-  /*tr.example-element-row:not(.example-expanded-row):hover {
-     background: #777; 
-  }*/
+  tr.element-row:not(.expanded-row):hover {
+     background: #d3d3d3; 
+  }
   
-  tr.example-element-row:not(.example-expanded-row):active {
+  tr.element-row:not(.expanded-row):active {
     background: #efefef;
   }
   
-  .example-element-row td {
+  .element-row td {
     border-bottom-width: 0;
   }
   
-  .example-element-detail {
+  .element-detail {
     overflow: hidden;
     display: flex;
   }
   
-  mat-grid-tile {
-    border: 0.7px solid black;
-  }
-  
-  .example-element-cabecalho-detalhe {
+  .element-cabecalho-detalhe {
     font-weight: bold;
     font-size: 16px;
     line-height: normal;
   }
   
-  .example-element-description {
-    padding: 16px;
-  }
-  
-  .example-element-description-attribution {
-    opacity: 0.5;
-  }
   
 
 
@@ -75,11 +48,15 @@
 
 
 
+/* .card .card-body {
+    padding: 0.9375rem 10px !important;
+    position: relative !important;
+} */
 
 
 
 
-   /* .example-element-lista-expandida {
+   /* .element-lista-expandida {
     min-width: 80px;
     padding: 8px;
     font-weight: lighter;
@@ -88,7 +65,7 @@
    
   } */
 
-  /* .example-container {
+  /* .container {
     display: flex;
     flex-direction: column;
     max-height: 500px;

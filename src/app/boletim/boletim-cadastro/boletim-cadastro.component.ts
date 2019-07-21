@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 class Boletim {
   codigo: any;
@@ -20,14 +22,23 @@ export class BoletimCadastroComponent implements OnInit {
  pmsecao: any;
  boletim = new Boletim();
 
- constructor() { }
+ constructor(
+  private route: ActivatedRoute,
+  private router: Router,
+  private title: Title
+ ) { }
 
   ngOnInit() {
-    this.boletim.codigo = '001';
-    this.boletim.rg = '31355';
-    this.boletim.nome = 'Cláudio Martins da Silva';
-    this.boletim.dataSys = '20/06/2019 17:24';
-    this.pmsecao = this.boletim.rg + '  ' + this.boletim.nome
+    this.title.setTitle('Novo Boletim');
+    const codigo = this.route.snapshot.params['codigo'];
+
+    if (codigo) {
+      this.editar(codigo);
+    }
+  }
+
+  editar(codigo: number) {
+    console.log(codigo);
   }
 
 }

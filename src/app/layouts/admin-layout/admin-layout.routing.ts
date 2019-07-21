@@ -12,12 +12,14 @@ import { NotificationsComponent } from '../../notifications/notifications.compon
 import { OrigemBoletimComponent } from 'app/cadastros/origem-boletim/origem-boletim.component';
 
 export const AdminLayoutRoutes: Routes = [
-    // {
-    //   path: '',
-    //   children: [ {
-    //     path: 'dashboard',
-    //     component: DashboardComponent
-    // }]}, {
+    /*rotas para cadastro*/
+    {
+       path: '',
+       children: [ {
+         path: 'boletim-cadastro/:codigo',
+         component: BoletimCadastroComponent
+     }]},
+     //  {
     // path: '',
     // children: [ {
     //   path: 'userprofile',
@@ -54,6 +56,8 @@ export const AdminLayoutRoutes: Routes = [
     //         component: UpgradeComponent
     //     }]
     // }
+
+    /*rotas para novo*/
     { path: 'home',      component: DashboardComponent },
     { path: 'usuario-cadastro',   component: UserProfileComponent },
     { path: 'usuario-list',     component: UserListComponent },

@@ -11,6 +11,8 @@ import { ComponentsModule } from './components/components.module';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
+import { ConfirmaExclusaoDialog } from './boletim/boletim-list/boletim-list.component';
+import { MatDialogModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -23,6 +25,7 @@ import { BrowserModule } from '@angular/platform-browser';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
+    MatDialogModule,
     AgmCoreModule.forRoot({
       apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
     })

@@ -19,11 +19,11 @@
                 
                     <div class="card-body">
                         <div class="table-responsive">
-                          <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="table table-hover">
+                          <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
                               <!-- Código -->
                                 <ng-container matColumnDef="codigo">
                                     <th mat-header-cell *matHeaderCellDef>Código</th>
-                                    <td mat-cell *matCellDef="let element" (mouseover)="buscaDadosBoletim()" matTooltip={{dados}} >
+                                    <td mat-cell *matCellDef="let element">
                                          {{element.codigo}} </td>
                                 </ng-container>
 
@@ -57,44 +57,46 @@
                                         <td mat-cell *matCellDef="let element"> {{element.status}} </td>
                                  </ng-container>
 
-                                 <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+                                 <!-- Detalhes (expanded) -->
                                 <ng-container matColumnDef="expandedDetail">
                                         <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
-                                        <div class="example-element-detail"
+                                        <div class="element-detail"
                                             [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-                                          <div class="example-element-diagram">
-                                            <div class="example-element-cabecalho-detalhe"> Boletim: {{element.boletim}} </div>
+                                          <div class="element-diagram">
+                                            <div class="element-cabecalho-detalhe"> Boletim: {{element.boletim}} </div>
                                                 <div class="row">
                                                         <div class="col-md-6">Status:</div>
                                                         <div class="col-md-6">{{element.status}}</div>
                                                        
                                                         <div class="Monta"></div>
                                                 </div>    
-                                                  
                                           </div>
                                          </div>
                                         </td>
                                 </ng-container>
+                                <!-- Ação -->
                                 <ng-container matColumnDef="acoes">
                                     <th mat-header-cell *matHeaderCellDef></th>
                                     <td mat-cell *matCellDef="let element" class="td-actions text-right"> 
                                                 <button #editar mat-raised-button type="button" (click)="onEdit(element.codigo)"
-                                                class="btn btn-primary btn-link btn-sm btn-just-icon">
-                                                    <i class="material-icons">edit</i>
+                                                class="btn btn-primary btn-link btn-sm btn-just-icon" matTooltip="Editar" 
+                                                  [routerLink]="['/boletim-cadastro', element.codigo]">
+                                                  <i class="material-icons">edit</i>
                                                 </button>
-                                                <button mat-raised-button type="button" (click)="onRemove(element)"
-                                                class="btn btn-danger btn-link btn-sm btn-just-icon">
+                                                <button mat-raised-button type="button" (click)="openDialog(element)"
+                                                class="btn btn-danger btn-link btn-sm btn-just-icon"  matTooltip="Excluir"
+                                                [matTooltipPosition]="'above'">
                                                     <i class="material-icons">close</i>
                                                 </button>
                                     </td>
                                 </ng-container>
                                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-                                        class="example-element-row"
+                                        class="element-row" 
                                         [class.expanded]="expandedElement === row"
                                         (click)="expandedElement = expandedElement === row ? null : row">
                                 </tr>
-                                <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+                                <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
                                 </table>
                             
                                 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>

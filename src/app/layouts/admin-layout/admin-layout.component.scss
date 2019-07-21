@@ -1,0 +1,13 @@
+.footer {
+    padding: 0 0 !important;
+}
+
+/* para todos os tooltip */
+::ng-deep .mat-tooltip {
+    background:#000 !important;
+    color:#fff !important;
+    font-size: 14px  !important;
+    font-weight: bold !important;
+    font-family: Verdana, Geneva, Tahoma, sans-serif  !important;
+
+}
