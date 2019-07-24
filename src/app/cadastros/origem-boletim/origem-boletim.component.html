@@ -8,7 +8,7 @@
                         <p class="card-category"></p>
                     </div>
                     <div class="card-body">
-                        <form [formGroup]="form">
+                        <form  #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
                             <div class="row">
                               <div class="col-sm-2">
                                 <mat-form-field class="full-width">
@@ -18,7 +18,19 @@
                               </div>
                               <div class="col-md-7">
                                     <mat-form-field class="full-width">
-                                        <input matInput placeholder="Nome" type="text">
+                                        <input matInput placeholder="Nome" type="text" required="true" minlength="3"
+                                        maxlength="100" formControlName="nome">
+                                        <div *ngIf="!nome.pristine && nome.errors">
+                                            <p *ngIf="nome.errors.required">
+                                              Nome é obrigatório.
+                                            </p>
+                                            <p *ngIf="nome.errors.minlength">
+                                              Nome deve ter no mínimo 3 caracters.
+                                            </p>
+                                            <p *ngIf="nome.errors.maxlength">
+                                              Nome deve ter no máximo 100 caracters.
+                                            </p>
+                                          </div>
                                       </mat-form-field>
                                 </div>
                             </div>

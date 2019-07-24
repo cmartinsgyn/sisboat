@@ -78,8 +78,7 @@
                                 <ng-container matColumnDef="acoes">
                                     <th mat-header-cell *matHeaderCellDef></th>
                                     <td mat-cell *matCellDef="let element" class="td-actions text-right"> 
-                                                <button #editar mat-raised-button type="button" (click)="onEdit(element.codigo)"
-                                                class="btn btn-primary btn-link btn-sm btn-just-icon" matTooltip="Editar" 
+                                                <button #editar mat-raised-button type="button"                                                 class="btn btn-primary btn-link btn-sm btn-just-icon" matTooltip="Editar" 
                                                   [routerLink]="['/boletim-cadastro', element.codigo]">
                                                   <i class="material-icons">edit</i>
                                                 </button>

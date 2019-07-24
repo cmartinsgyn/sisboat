@@ -57,7 +57,7 @@ export class BoletimListComponent implements OnInit {
       }
     });
   }
-
+  /** chama o serviço para exclusão */
   excluir(elemento: any) {
     console.log('Serviço Excluir item código ' + elemento.codigo);
 
@@ -78,7 +78,7 @@ export class Boletins {
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'confirma-exclusao-dialog',
-  templateUrl: 'confirma-exclusao.html',
+  templateUrl: 'confirma-exclusao-dialog.html',
 })
 // tslint:disable-next-line: component-class-suffix
 export class ConfirmaExclusaoDialog {

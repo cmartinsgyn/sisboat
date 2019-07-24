@@ -12,9 +12,6 @@ import { UserProfileComponent } from '../../user/user-profile/user-profile.compo
 import { UserNewpasswordComponent } from 'app/user/user-newpassword/user-newpassword.component';
 import { UserListComponent } from 'app/user/user-list/user-list.component';
 import { BoletimListComponent, ConfirmaExclusaoDialog } from '../../boletim/boletim-list/boletim-list.component';
-import { TypographyComponent } from '../../typography/typography.component';
-import { IconsComponent } from '../../icons/icons.component';
-import { NotificationsComponent } from '../../notifications/notifications.component';
 import { OrigemBoletimComponent } from 'app/cadastros/origem-boletim/origem-boletim.component';
 
 import { DateFormat } from '../admin-layout/date-format';
@@ -73,9 +70,6 @@ import {MatMenuModule} from '@angular/material/menu';
     DashboardComponent,
     UserProfileComponent,
     BoletimListComponent,
-    TypographyComponent,
-    IconsComponent,
-    NotificationsComponent,
     BoletimCadastroComponent,
     UserListComponent,
     UserNewpasswordComponent,
