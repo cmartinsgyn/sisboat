@@ -11,6 +11,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatDialogModule } from '@angular/material';
+import { ToastyModule } from 'ng2-toasty';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { MatDialogModule } from '@angular/material';
     RouterModule,
     AppRoutingModule,
     MatDialogModule,
+    ToastyModule.forRoot()
     // AgmCoreModule.forRoot({
     //   apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
     // })

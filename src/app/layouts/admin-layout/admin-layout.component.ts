@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { ToastyConfig } from 'ng2-toasty';
 import { Location, LocationStrategy, PathLocationStrategy, PopStateEvent } from '@angular/common';
 import 'rxjs/add/operator/filter';
 import { filter } from 'rxjs/operators';
@@ -19,7 +20,9 @@ export class AdminLayoutComponent implements OnInit {
   private lastPoppedUrl: string;
   private yScrollStack: number[] = [];
 
-  constructor( public location: Location, private router: Router) {}
+  constructor( public location: Location,
+    private router: Router,
+    ) { }
 
   ngOnInit() {
       const isWindows = navigator.platform.indexOf('Win') > -1 ? false : false;

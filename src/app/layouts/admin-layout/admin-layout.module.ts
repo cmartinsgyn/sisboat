@@ -61,8 +61,7 @@ import {MatMenuModule} from '@angular/material/menu';
     MatMenuModule,
     MatGridListModule,
     ReactiveFormsModule,
-    MatDialogModule
-
+    MatDialogModule,
     ],
     entryComponents: [ConfirmaExclusaoDialog],
 
