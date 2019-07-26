@@ -18,18 +18,13 @@
                               <div class="col-md-7">
                                     <mat-form-field class="full-width">
                                         <input matInput placeholder="Nome" type="text" formControlName="nome">
-                                        <div *ngIf="!nome.pristine && nome.errors">
-                                          <p *ngIf="nome.errors.required">
-                                            Nome é obrigatório.
-                                          </p>
-                                          <p *ngIf="nome.errors.minlength">
-                                            Nome deve ter no mínimo 3 caracters.
-                                          </p>
-                                          <p *ngIf="nome.errors.maxlength">
-                                            Nome deve ter no máximo 100 caracters.
-                                          </p>
-                                        </div>
                                     </mat-form-field>
+                                    <div *ngIf="!nome.pristine && nome.errors">
+                                      <p *ngIf="nome.errors.required">
+                                        Nome é obrigatório.
+                                      </p>
+                                      
+                                    </div>
                               </div>
                             </div>
                             

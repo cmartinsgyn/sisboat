@@ -9,8 +9,8 @@ import { ToastyService } from 'ng2-toasty';
   styleUrls: ['./origem-boletim.component.scss']
 })
 export class OrigemBoletimComponent implements OnInit {
-  formulario: FormGroup;
 
+  formulario: FormGroup;
   // origem = new OrigemBo();
 
   constructor(
