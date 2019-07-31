@@ -8,7 +8,7 @@
                         <p class="card-category"></p>
                     </div>
                     <div class="card-body">
-                        <form [formGroup]="formulario" (ngSubmit)="salvar()">
+                        <form [formGroup]="form" autocomplete="off" (ngSubmit)="salvar()">
                             <div class="row">
                               <div class="col-sm-2">
                                 <mat-form-field class="full-width">
@@ -17,22 +17,21 @@
                               </div>
                               <div class="col-md-7">
                                     <mat-form-field class="full-width">
-                                        <input matInput placeholder="Nome" type="text" formControlName="nome">
+                                        <input matInput placeholder="Nome" type="text"
+                                        formControlName="nome">
+                                       
+                                        <mat-error *ngIf="errorHandling('nome', 'required')">Nome é obrigatório</mat-error>
+
                                     </mat-form-field>
-                                    <div *ngIf="!nome.pristine && nome.errors">
-                                      <p *ngIf="nome.errors.required">
-                                        Nome é obrigatório.
-                                      </p>
-                                      
-                                    </div>
                               </div>
+
+                              
                             </div>
                             
                             <button mat-raised-button type="submit" class="btn btn-danger pull-right"
-                             [disabled]="!formulario.valid">Salvar</button>
+                             [disabled]="!form.valid">Salvar</button>
                             <div class="clearfix"></div>
-                            <div>{{ formulario.value | json}}</div>
-                            <div>{{ formulario.valid | json }}</div>
+        
                         </form>
                     </div>
                 </div>

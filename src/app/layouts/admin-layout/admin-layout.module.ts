@@ -36,6 +36,7 @@ import {
 
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatMenuModule} from '@angular/material/menu';
+import { SharedModule } from 'app/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -62,6 +63,7 @@ import {MatMenuModule} from '@angular/material/menu';
     MatGridListModule,
     ReactiveFormsModule,
     MatDialogModule,
+    SharedModule
     ],
     entryComponents: [ConfirmaExclusaoDialog],
 

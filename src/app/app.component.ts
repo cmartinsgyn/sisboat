@@ -1,5 +1,6 @@
-import { Component} from '@angular/core';
+import { Component, Input} from '@angular/core';
 import { ToastyConfig } from 'ng2-toasty';
+import { FormControl, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -8,6 +9,9 @@ import { ToastyConfig } from 'ng2-toasty';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+    @Input() error: string;
+    @Input() text: string;
+    @Input() form: FormGroup
 
   constructor(
     private toastyConfig: ToastyConfig) {
@@ -15,4 +19,4 @@ export class AppComponent {
       this.toastyConfig.position = 'bottom-left';
     }
 
-}
+  }
