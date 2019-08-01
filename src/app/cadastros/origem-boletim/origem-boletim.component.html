@@ -17,21 +17,25 @@
                               </div>
                               <div class="col-md-7">
                                     <mat-form-field class="full-width">
-                                        <input matInput placeholder="Nome" type="text"
-                                        formControlName="nome">
-                                       
-                                        <mat-error *ngIf="errorHandling('nome', 'required')">Nome é obrigatório</mat-error>
-
+                                        <input matInput placeholder="Nome" type="text" [errorStateMatcher]="erro"
+                                        formControlName='nome' [ngClass]="{ 'is-invalid': submitted && f.nome.errors }"/>
+                                       <mat-error *ngIf="submitted && f.nome.errors && f.nome.errors.required">Nome é obrigatório</mat-error>
+                                       <mat-error *ngIf="submitted && f.nome.errors && f.nome.errors.minlength">
+                                            Mínimo de {{ f.nome.errors?.minlength?.requiredLength }} caracteres!</mat-error>
+                                       <mat-error *ngIf="submitted && f.nome.errors && f.nome.errors.maxlength">
+                                                    Máximo de {{ f.nome.errors?.maxlength?.requiredLength }} caracteres!</mat-error> 
+                                        <mat-error *ngIf="submitted && form.errors && form.errors.cpfInvalido">cpf inválido</mat-error>                       
                                     </mat-form-field>
                               </div>
-
-                              
                             </div>
                             
-                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"
-                             [disabled]="!form.valid">Salvar</button>
-                            <div class="clearfix"></div>
-        
+                            <div class="text-center">
+                            <button class="btn btn-danger pull-right">Salvar</button>
+                            </div>
+
+                            <div>{{ form.value | json}}</div>
+                            <div>{{ form.valid | json }}</div>
+                            <div>{{ form.errors | json }}</div>
                         </form>
                     </div>
                 </div>
