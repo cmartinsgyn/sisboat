@@ -32,7 +32,7 @@ import { ToastyModule } from 'ng2-toasty';
   ],
   declarations: [
     AppComponent,
-    AdminLayoutComponent,
+    AdminLayoutComponent
 
   ],
   providers: [],

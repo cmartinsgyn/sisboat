@@ -7,12 +7,12 @@
                         <h4 class="card-title">Boletim de Acidente de Trânsito e de Ocorrência</h4>
                     </div>
                     <div class="card-body">
-                        <form #f="ngForm">
+                        <form [formGroup]="form" autocomplete="off" (ngSubmit)="salvar()">
                             <div class="row">
                                 <div class="col-sm-2">
                                   <mat-form-field class="full-width">
                                      <input matInput name="codigoT" #codigoT="ngModel" type="number"
-                                     [(ngModel)]="boletim.codigo" placeholder="Código" disabled>
+                                     [(ngModel)]="boletim.codigo" placeholder="Código">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-sm-6">

@@ -3,10 +3,11 @@ import { Validators, NgForm, FormGroup, FormBuilder, FormControl, FormGroupDirec
 import { ToastyService } from 'ng2-toasty';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { ErrorStateMatcher } from '@angular/material';
+
 
 import { ValidacoesUtil } from 'app/core/validacoes-util';
 import { OrigemBo } from 'app/core/model/origemBo';
+import { CrossFieldErrorMatcher } from 'app/core/cross-field-error-matcher';
 @Component({
   selector: 'app-origem-boletim',
   templateUrl: './origem-boletim.component.html',
@@ -21,7 +22,6 @@ export class OrigemBoletimComponent implements OnInit {
   origem = new OrigemBo();
   form: FormGroup;
   submitted = false;
-  // tslint:disable-next-line: no-use-before-declare
   erro = new CrossFieldErrorMatcher();
 
 
@@ -62,6 +62,7 @@ export class OrigemBoletimComponent implements OnInit {
 
     criarFormulario() {
       this.form = this.fb.group({
+        codigo: new FormControl({value: '', disabled: true}, Validators.required),
         nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(11)]]
       }, {
         validator: ValidacoesUtil.ValidaCpf
@@ -76,8 +77,8 @@ export class OrigemBoletimComponent implements OnInit {
 }
 
 /** Error when the parent is invalid */
-class CrossFieldErrorMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    return control.dirty && form.invalid;
-  }
-}
+// class CrossFieldErrorMatcher implements ErrorStateMatcher {
+//   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+//     return control.dirty && form.invalid;
+//   }
+// }
