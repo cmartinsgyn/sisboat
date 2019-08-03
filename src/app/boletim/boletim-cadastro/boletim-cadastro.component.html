@@ -11,28 +11,39 @@
                             <div class="row">
                                 <div class="col-sm-2">
                                   <mat-form-field class="full-width">
-                                     <input matInput name="codigoT" #codigoT="ngModel" type="number"
-                                     [(ngModel)]="boletim.codigo" placeholder="Código">
-                                    </mat-form-field>
+                                    <input matInput type="number" placeholder="Código" formControlName='codigo'/>
+                                 </mat-form-field>
                                 </div>
-                                <div class="col-sm-6">
+
+                                <div class="col-sm-2">
                                     <mat-form-field class="full-width">
-                                    <input matInput name="nomeT" #nomeT="ngModel" type="text" 
-                                    [(ngModel)]="pmsecao" placeholder="Pm Seção" disabled>
+                                      <input matInput type="text" placeholder="Pm Seção" formControlName='pmsecao'/>
                                     </mat-form-field>
                                 </div> 
+
                                 <div class="col-sm-4">
                                     <mat-form-field class="full-width">
-                                    <input matInput name="dataT" #dataT="ngModel" type="text" 
-                                    [(ngModel)]="boletim.dataSys" placeholder="Data" disabled>  
+                                      <input matInput type="text" placeholder="Nome" formControlName='nomepmsecao'/>
+                                    </mat-form-field>
+                                </div> 
+
+                                <div class="col-sm-4">
+                                    <mat-form-field class="full-width">
+                                      <input matInput type="date"  placeholder="Data de entrada no Sistema" formControlName='data'/>
                                     </mat-form-field>
                                 </div> 
                             </div>
                             <div class="row">
                                 <div class="col-md-4">
                                     <mat-form-field class="full-width">
-                                      <input matInput placeholder="Nº Boletim" name="nboletimT" type="number"
-                                      #nboletimT="ngModel" [(ngModel)]="boletim.nboletim" min="0" max="15" required >
+                                      <input matInput type="text" placeholder="Nº Boletim"
+                                        formControlName='boletim' [ngClass]="{ 'is-invalid': submitted && f.boletim.errors }"/>
+                                         <mat-error *ngIf="submitted && f.boletim.errors && f.boletim.errors.required">
+                                           Nº do Boletim é obrigatório</mat-error>
+                                         <mat-error *ngIf="submitted && f.boletim.errors && f.boletim.errors.minlength">
+                                              Mínimo de {{ f.boletim.errors?.minlength?.requiredLength }} caracteres!</mat-error>
+                                         <mat-error *ngIf="submitted && f.boletim.errors && f.boletim.errors.maxlength">
+                                              Máximo de {{ f.boletim.errors?.maxlength?.requiredLength }} caracteres!</mat-error>   
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">

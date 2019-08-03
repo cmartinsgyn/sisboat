@@ -24,7 +24,7 @@
                                        <mat-error *ngIf="submitted && f.nome.errors && f.nome.errors.minlength">
                                             Mínimo de {{ f.nome.errors?.minlength?.requiredLength }} caracteres!</mat-error>
                                        <mat-error *ngIf="submitted && f.nome.errors && f.nome.errors.maxlength">
-                                                    Máximo de {{ f.nome.errors?.maxlength?.requiredLength }} caracteres!</mat-error> 
+                                                    Máximo de {{ f.nome.errors?.minlength?.requiredLength }} caracteres!</mat-error> 
                                         <mat-error *ngIf="submitted && form.errors && form.errors.cpfInvalido">cpf inválido</mat-error>                       
                                     </mat-form-field>
                               </div>

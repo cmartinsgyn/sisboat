@@ -1,17 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ToastyService } from 'ng2-toasty';
-import { ValidacoesUtil } from 'app/core/validacoes-util';
 
-class Boletim {
-  codigo: any;
-  rg: string;
-  nome: string;
-  dataSys: string;
-  nboletim: string;
-  }
+import { ValidacoesUtil } from 'app/core/validacoes-util';
+import { Boletim } from 'app/core/model/boletim';
 
 @Component({
   selector: 'app-boletim-cadastro',
@@ -27,6 +21,7 @@ export class BoletimCadastroComponent implements OnInit {
  boletim = new Boletim();
  form: FormGroup;
  submitted = false;
+ bolMin = 7; bolMax = 7;
 
  constructor(
   private route: ActivatedRoute,
@@ -70,7 +65,31 @@ export class BoletimCadastroComponent implements OnInit {
 
     criarFormulario() {
       this.form = this.fb.group({
-       // nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(11)]]
+        codigo: [{value: 1, disabled: true}],
+        pmsecao: [{value: 31355, disabled: true}],
+        nomepmsecao: [{value: 'Cláudio Martins da Silva', disabled: true}],
+        cpf: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(11)]],
+        boletim: ['', [Validators.required, Validators.minLength(this.bolMin), Validators.maxLength(this.bolMax)]],
+        tipoBoletim: [''],
+        origemBo: [''],
+        data: [''],
+        emissorBo: [''],
+        nomeEmissor: [''],
+        status: [''],
+        monta: [''],
+        vitima: [''],
+        autor: [''],
+        placa: [''],
+        municipio: [''],
+        barreira: [''],
+        problema: [''],
+        solucao: [''],
+        obs: [''],
+
+        dataProvidencia: [''],
+        envioDetran: [''],
+        providencia: ['']
+
       }, {
         // validator: ValidacoesUtil.ValidaCpf
       }

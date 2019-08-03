@@ -1,8 +1,9 @@
 import { OrigemBo } from './origemBo';
 
-export class Cadastro {
+export class Boletim {
     codigo: number;
     pmsecao: string;
+    nomepmsecao: string;
     dataSys: Date;
     boletim: number;
     tipoBoletim: number;
