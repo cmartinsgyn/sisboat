@@ -7,7 +7,7 @@ export class Boletim {
     dataSys: Date;
     boletim: number;
     tipoBoletim: number;
-    origemBo = new OrigemBo();
+    origemBoletim = new OrigemBo();
     data: Date;
     emissorBo: string;
     nomeEmissor: string;

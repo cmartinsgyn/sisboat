@@ -1,216 +1,237 @@
 <div class="main-content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header card-header-success">
-                        <h4 class="card-title">Boletim de Acidente de Trânsito e de Ocorrência</h4>
-                    </div>
-                    <div class="card-body">
-                        <form [formGroup]="form" autocomplete="off" (ngSubmit)="salvar()">
-                            <div class="row">
-                                <div class="col-sm-2">
-                                  <mat-form-field class="full-width">
-                                    <input matInput type="number" placeholder="Código" formControlName='codigo'/>
-                                 </mat-form-field>
-                                </div>
-
-                                <div class="col-sm-2">
-                                    <mat-form-field class="full-width">
-                                      <input matInput type="text" placeholder="Pm Seção" formControlName='pmsecao'/>
-                                    </mat-form-field>
-                                </div> 
-
-                                <div class="col-sm-4">
-                                    <mat-form-field class="full-width">
-                                      <input matInput type="text" placeholder="Nome" formControlName='nomepmsecao'/>
-                                    </mat-form-field>
-                                </div> 
-
-                                <div class="col-sm-4">
-                                    <mat-form-field class="full-width">
-                                      <input matInput type="date"  placeholder="Data de entrada no Sistema" formControlName='data'/>
-                                    </mat-form-field>
-                                </div> 
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <mat-form-field class="full-width">
-                                      <input matInput type="text" placeholder="Nº Boletim"
-                                        formControlName='boletim' [ngClass]="{ 'is-invalid': submitted && f.boletim.errors }"/>
-                                         <mat-error *ngIf="submitted && f.boletim.errors && f.boletim.errors.required">
-                                           Nº do Boletim é obrigatório</mat-error>
-                                         <mat-error *ngIf="submitted && f.boletim.errors && f.boletim.errors.minlength">
-                                              Mínimo de {{ f.boletim.errors?.minlength?.requiredLength }} caracteres!</mat-error>
-                                         <mat-error *ngIf="submitted && f.boletim.errors && f.boletim.errors.maxlength">
-                                              Máximo de {{ f.boletim.errors?.maxlength?.requiredLength }} caracteres!</mat-error>   
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-md-4">
-                                  <mat-form-field>
-                                    <mat-label>Tipo Boletim</mat-label>
-                                    <mat-select #tipoBoletimT value="boletim" (selectionChange)="triggerResize()">
-                                      <mat-option value="Boat">Boat</mat-option>
-                                      <mat-option value="Boc">Boc</mat-option>
-                                    </mat-select>
-                                  </mat-form-field>
-                                </div>  
-                                <div class="col-md-4">
-                                    <mat-form-field>
-                                        <mat-label>Origem Boletim</mat-label>
-                                        <mat-select #origemBoletimT value="16px" (selectionChange)="triggerResize()">
-                                          <mat-option value="Rai">RAI</mat-option>
-                                          <mat-option value="Talonario">Talonário</mat-option>
-                                          <mat-option value="Talonario">Manual</mat-option>
-                                        </mat-select>
-                                      </mat-form-field>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <mat-form-field>
-                                        <input matInput [matDatepicker]="picker" placeholder="Data">
-                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                        <mat-datepicker #picker></mat-datepicker>
-                                      </mat-form-field>
-                                </div>
-                                <div class="col-md-2">
-                                  <mat-form-field class="full-width">
-                                    <input matInput placeholder="R.G Emissor BO" type="text">
-                                  </mat-form-field>
-                                </div>
-                                <div class="col-md-4">
-                                  <mat-form-field class="full-width">
-                                    <input matInput type="text" disabled>
-                                  </mat-form-field>
-                                </div>
-                                <div class="col-md-4">
-                                    <mat-form-field>
-                                        <mat-label>Status</mat-label>
-                                        <mat-select #statusT value="status" (selectionChange)="triggerResize()">
-                                          <mat-option value="Disponivel">Disponível</mat-option>
-                                          <mat-option value="Pendente">Pendente</mat-option>
-                                          <mat-option value="Resolvido">Resolvido</mat-option>
-                                        </mat-select>
-                                      </mat-form-field>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <mat-form-field>
-                                        <mat-label>Monta</mat-label>
-                                        <mat-select #montaT value="monta" (selectionChange)="triggerResize()">
-                                          <mat-option value="Pequena">Pequena</mat-option>
-                                          <mat-option value="Media">Média</mat-option>
-                                          <mat-option value="Grande">Grande</mat-option>
-                                        </mat-select>
-                                      </mat-form-field>
-                                </div>
-                                <div class="col-md-5">
-                                  <mat-form-field class="full-width">
-                                    <input matInput placeholder="Vítima" type="text">
-                                  </mat-form-field>
-                                </div>
-                                <div class="col-md-5">
-                                  <mat-form-field class="full-width">
-                                    <input matInput placeholder="Autor" type="text">
-                                  </mat-form-field>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-2">
-                                  <mat-form-field class="full-width">
-                                    <input matInput name="placaT" mask="9999" ng-model="placaT" placeholder="Placa" type="text">
-                                  </mat-form-field>
-                                </div>
-                               <div class="col-md-5">
-                                  <mat-form-field>
-                                      <mat-label>Municipio</mat-label>
-                                      <mat-select #municipioT value="municipio" (selectionChange)="triggerResize()">
-                                        <mat-option value="Anapolis">Anápolis</mat-option>
-                                        <mat-option value="Goiania">Goiânia</mat-option>
-                                        <mat-option value="Sao Luiz">São Luíz dos Montes Belos</mat-option>
-                                      </mat-select>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-md-5">
-                                    <mat-form-field>
-                                        <mat-label>Barreira</mat-label>
-                                        <mat-select #barreiraT value="barreira" (selectionChange)="triggerResize()">
-                                          <mat-option value="Go020">GO20</mat-option>
-                                          <mat-option value="GO070">GO070</mat-option>
-                                          <mat-option value="Caldas Novas">Caldas Novas</mat-option>
-                                        </mat-select>
-                                      </mat-form-field>
-                                </div>
-                              </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                      <mat-form-field class="full-width">
-                                        <textarea matInput placeholder="Problema"></textarea>
-                                      </mat-form-field>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                  <div class="col-md-12" hidden>
-                                    <mat-form-field class="full-width">
-                                      <textarea matInput placeholder="Solução"></textarea>
-                                    </mat-form-field>
-                                  </div>
-                              </div>    
-                              <div class="row">
-                                   <div class="col-md-12">
-                                     <mat-form-field class="full-width">
-                                       <textarea matInput placeholder="Observação" ></textarea>
-                                     </mat-form-field>
-                                   </div>
-                              </div>
-                                <button mat-raised-button type="submit" class="btn btn-success pull-right">Salvar</button>
-                                <div class="clearfix"></div>
-                        </form>
-                    </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header card-header-success">
+            <h4 class="card-title">Boletim de Acidente de Trânsito e de Ocorrência</h4>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="form" autocomplete="off" (ngSubmit)="salvar()">
+              <div class="row">
+                <div class="col-sm-2">
+                  <mat-form-field class="full-width">
+                    <input matInput type="number" placeholder="Código" formControlName='codigo' />
+                  </mat-form-field>
                 </div>
-            </div>
-            <div class="col-md-4 alinhaProv alinha">
-              <div class="card card-profile">
-                <div class="card-header card-header-success">
-                  <h4 class="card-title">Providências</h4>
+
+                <div class="col-sm-2">
+                  <mat-form-field class="full-width">
+                    <input matInput type="text" placeholder="Pm Seção" formControlName='pmsecao' />
+                  </mat-form-field>
                 </div>
-                  <div class="card-body">
-                   <div class="row">
-                    <div class="col-md-6">
-                      <mat-form-field class="full-width">
-                        <input matInput [matDatepicker]="dataProvidencia" placeholder="Data">
-                        <mat-datepicker-toggle matSuffix [for]="dataProvidencia"></mat-datepicker-toggle>
-                        <mat-datepicker #dataProvidencia></mat-datepicker> 
-                      </mat-form-field>
-                   </div>
-                   </div>
-                   <div class="row">
-                    <div class="col-md-6">
-                      <section class="section">
-                        <mat-checkbox class="margin" [(ngModel)]="checked">Enviado Detran</mat-checkbox>
-                      </section>
-                    </div>
-                  </div> 
-                  <div class="row">
-                    <div class="col-md-12">
-                      <mat-form-field class="full-width">
-                       <textarea matInput placeholder="Providências" ></textarea>
-                      </mat-form-field>
-                     </div>
-                  </div>
-                    </div>
-                
-                 </div> 
-                 
+
+                <div class="col-sm-4">
+                  <mat-form-field class="full-width">
+                    <input matInput type="text" placeholder="Nome" formControlName='nomepmsecao' />
+                  </mat-form-field>
+                </div>
+
+                <div class="col-sm-4">
+                  <mat-form-field class="full-width">
+                    <input matInput type="date" placeholder="Data de entrada no Sistema" formControlName='dataSys'>
+                  </mat-form-field>
+                </div>
               </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field class="full-width">
+                    <input matInput type="text" placeholder="Nº Boletim" maxlength="9" formControlName='boletim'
+                      [ngClass]="{ 'is-invalid': submitted && f.boletim.errors }" />
+                    <mat-error *ngIf="submitted && f.boletim.errors && f.boletim.errors.required">
+                      Nº do Boletim é obrigatório</mat-error>
+                    <mat-error *ngIf="submitted && f.boletim.errors && f.boletim.errors.minlength">
+                      Mínimo de {{ f.boletim.errors?.minlength?.requiredLength }} caracteres!</mat-error>
+                    <mat-error *ngIf="submitted && f.boletim.errors && f.boletim.errors.maxlength">
+                      Máximo de {{ f.boletim.errors?.maxlength?.requiredLength }} caracteres!</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field>
+                    <mat-label>Tipo Boletim</mat-label>
+                    <mat-select formControlName='tipoBoletim'
+                      [ngClass]="{ 'is-invalid': submitted && f.tipoBoletim.errors }">
+                      <mat-option *ngFor="let tiposBo of tiposBoletins" value="tiposBo.value">
+                        {{ tiposBo.descricao}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="submitted && f.tipoBoletim.errors && f.tipoBoletim.errors.required">
+                      Selecione o tipo de boletim! </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field>
+                    <mat-label>Origem Boletim</mat-label>
+                    <mat-select formControlName='origemBoletim'
+                      [ngClass]="{ 'is-invalid': submitted && f.origemBoletim.errors }">
+                      <mat-option *ngFor="let origemBo of origemBoletins" value="origemBo.value">
+                        {{ origemBo.descricao }}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="submitted && f.origemBoletim.errors && f.origemBoletim.errors.required">
+                      Selecione a origem do boletim! </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-2">
+                  <mat-form-field>
+                    <input matInput [matDatepicker]="picker" placeholder="Data" formControlName='data'>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+
+                    <mat-error *ngIf="submitted && f.data.errors && f.data.errors.required">
+                        Selecione a data do boletim! </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-2">
+                  <mat-form-field class="full-width">
+                    <input matInput type="text" placeholder="R.G Emissor BO" type="text" maxlength="5"
+                     formControlName='emissorBo' [ngClass]="{ 'is-invalid': submitted && f.emissorBo.errors }"/>
+                    
+                     <mat-error *ngIf="submitted && f.emissorBo.errors && f.emissorBo.errors.required">
+                        Emissor do boletim é obrigatório</mat-error>
+                     <mat-error *ngIf="submitted && f.emissorBo.errors && f.emissorBo.errors.minlength">
+                            Mínimo de {{ f.emissorBo.errors?.minlength?.requiredLength }} caracteres!</mat-error>
+                     <mat-error *ngIf="submitted && f.emissorBo.errors && f.emissorBo.errors.maxlength">
+                            Máximo de {{ f.emissorBo.errors?.maxlength?.requiredLength }} caracteres!</mat-error>   
+                  </mat-form-field>
+                </div>
 
 
-         
-       </div>
+
+
+
+                <div class="col-md-4">
+                  <mat-form-field class="full-width">
+                    <input matInput type="text" formControlName="nomeEmissor" disabled>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field>
+                    <mat-label>Status</mat-label>
+                    <mat-select #statusT value="status" (selectionChange)="triggerResize()">
+                      <mat-option value="Disponivel">Disponível</mat-option>
+                      <mat-option value="Pendente">Pendente</mat-option>
+                      <mat-option value="Resolvido">Resolvido</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-2">
+                  <mat-form-field>
+                    <mat-label>Monta</mat-label>
+                    <mat-select #montaT value="monta" (selectionChange)="triggerResize()">
+                      <mat-option value="Pequena">Pequena</mat-option>
+                      <mat-option value="Media">Média</mat-option>
+                      <mat-option value="Grande">Grande</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-5">
+                  <mat-form-field class="full-width">
+                    <input matInput placeholder="Vítima" type="text">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-5">
+                  <mat-form-field class="full-width">
+                    <input matInput placeholder="Autor" type="text">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-2">
+                  <mat-form-field class="full-width">
+                    <input matInput name="placaT" mask="9999" ng-model="placaT" placeholder="Placa" type="text">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-5">
+                  <mat-form-field>
+                    <mat-label>Municipio</mat-label>
+                    <mat-select #municipioT value="municipio" (selectionChange)="triggerResize()">
+                      <mat-option value="Anapolis">Anápolis</mat-option>
+                      <mat-option value="Goiania">Goiânia</mat-option>
+                      <mat-option value="Sao Luiz">São Luíz dos Montes Belos</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-5">
+                  <mat-form-field>
+                    <mat-label>Barreira</mat-label>
+                    <mat-select #barreiraT value="barreira" (selectionChange)="triggerResize()">
+                      <mat-option value="Go020">GO20</mat-option>
+                      <mat-option value="GO070">GO070</mat-option>
+                      <mat-option value="Caldas Novas">Caldas Novas</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <mat-form-field class="full-width">
+                    <textarea matInput placeholder="Problema"></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12" hidden>
+                  <mat-form-field class="full-width">
+                    <textarea matInput placeholder="Solução"></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <mat-form-field class="full-width">
+                    <textarea matInput placeholder="Observação"></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+              <button mat-raised-button type="submit" class="btn btn-success pull-right">Salvar</button>
+              <div class="clearfix"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 alinhaProv alinha">
+        <div class="card card-profile">
+          <div class="card-header card-header-success">
+            <h4 class="card-title">Providências</h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <mat-form-field class="full-width">
+                  <input matInput [matDatepicker]="dataProvidencia" placeholder="Data">
+                  <mat-datepicker-toggle matSuffix [for]="dataProvidencia"></mat-datepicker-toggle>
+                  <mat-datepicker #dataProvidencia></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <section class="section">
+                  <mat-checkbox class="margin" [(ngModel)]="checked">Enviado Detran</mat-checkbox>
+                </section>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <mat-form-field class="full-width">
+                  <textarea matInput placeholder="Providências"></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+
     </div>
   </div>
+</div>
 
 
 
@@ -239,8 +260,8 @@
 
 
 
-  
-  <!-- <div _ngcontent-exy-c48="" class="col-12 col-md-4 ng-star-inserted">
+
+<!-- <div _ngcontent-exy-c48="" class="col-12 col-md-4 ng-star-inserted">
       <div _ngcontent-exy-c48 _nghost-exy-c29 class="tc-contact">
        
           <div _ngcontent-exy-c29="" class="img-box ng-star-inserted">
@@ -258,6 +279,3 @@
               </div>
           </div>
       </div> -->
-
-
-  

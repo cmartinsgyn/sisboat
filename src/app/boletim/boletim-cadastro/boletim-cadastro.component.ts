@@ -19,9 +19,11 @@ export class BoletimCadastroComponent implements OnInit {
   }
 
  boletim = new Boletim();
+ tiposBoletins = [];
+ origemBoletins = [];
  form: FormGroup;
  submitted = false;
- bolMin = 7; bolMax = 7;
+ bolMin = 7; bolMax = 9;
 
  constructor(
   private route: ActivatedRoute,
@@ -35,6 +37,8 @@ export class BoletimCadastroComponent implements OnInit {
     this.title.setTitle('Novo Boletim');
     const codigo = this.route.snapshot.params['codigo'];
     this.criarFormulario();
+    this.carregarTiposBoletim();
+    this.carregarOrigemBoletim();
 
     if (codigo) {
       this.editar(codigo);
@@ -44,8 +48,27 @@ export class BoletimCadastroComponent implements OnInit {
   // pegar campos do form
   get f() { return this.form.controls; }
 
+  carregarTiposBoletim() {
+    // substituir pela busca no back enda que provavel ser um enum
+    this.tiposBoletins = [
+      { value: 1, descricao: 'BOC' },
+      { value: 2, descricao: 'BOAT' }
+    ];
+  }
+
+  carregarOrigemBoletim() {
+    // substituir pela busca no banco pois vai ser cadastrado pelo usuário
+    this.origemBoletins = [
+      { value: 1, descricao: 'RAI' },
+      { value: 2, descricao: 'TALONARIO' },
+      { value: 2, descricao: 'MANUAL' }
+
+    ];
+  }
+
   salvar() {
     this.submitted = true;
+    this.boletim = this.form.value
 
         // stop se formulário for inválido
         if (this.form.invalid) {
@@ -55,6 +78,7 @@ export class BoletimCadastroComponent implements OnInit {
         // display caso seja sucesso
         this.toastyService.success('Item cadastrado com sucesso!')
         console.log('SUCCESS!! :-)\n\n' + JSON.stringify(this.form.value, null, 4));
+        console.log(this.boletim.boletim);
         this.form.reset();
     }
 
@@ -68,12 +92,13 @@ export class BoletimCadastroComponent implements OnInit {
         codigo: [{value: 1, disabled: true}],
         pmsecao: [{value: 31355, disabled: true}],
         nomepmsecao: [{value: 'Cláudio Martins da Silva', disabled: true}],
+        dataSys: [{value: new FormControl(new Date()), disabled: true}],
         cpf: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(11)]],
         boletim: ['', [Validators.required, Validators.minLength(this.bolMin), Validators.maxLength(this.bolMax)]],
-        tipoBoletim: [''],
-        origemBo: [''],
-        data: [''],
-        emissorBo: [''],
+        tipoBoletim: ['', Validators.required],
+        origemBoletim: ['', Validators.required],
+        data: ['',  Validators.required],
+        emissorBo: ['', [Validators.required,  Validators.minLength(5), Validators.maxLength(6)]],
         nomeEmissor: [''],
         status: [''],
         monta: [''],
