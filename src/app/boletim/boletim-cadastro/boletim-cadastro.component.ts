@@ -21,6 +21,10 @@ export class BoletimCadastroComponent implements OnInit {
  boletim = new Boletim();
  tiposBoletins = [];
  origemBoletins = [];
+ status = [];
+ montas = [];
+ barreiras = [];
+ exigeProblema: Boolean = false;
  form: FormGroup;
  submitted = false;
  bolMin = 7; bolMax = 9;
@@ -39,6 +43,9 @@ export class BoletimCadastroComponent implements OnInit {
     this.criarFormulario();
     this.carregarTiposBoletim();
     this.carregarOrigemBoletim();
+    this.carregarStatus();
+    this.carregarMonta();
+    this.carregarBarreira();
 
     if (codigo) {
       this.editar(codigo);
@@ -51,19 +58,49 @@ export class BoletimCadastroComponent implements OnInit {
   carregarTiposBoletim() {
     // substituir pela busca no back enda que provavel ser um enum
     this.tiposBoletins = [
-      { value: 1, descricao: 'BOC' },
-      { value: 2, descricao: 'BOAT' }
+      { codigo: 1, descricao: 'BOC' },
+      { codigo: 2, descricao: 'BOAT' }
+    ];
+  }
+  carregarOrigemBoletim() {
+  // substituir pela busca no banco pois vai ser cadastrado pelo usuário
+    this.origemBoletins = [
+      { codigo: 1, descricao: 'RAI' },
+      { codigo: 2, descricao: 'TALONARIO' },
+      { codigo: 3, descricao: 'MANUAL' }
     ];
   }
 
-  carregarOrigemBoletim() {
-    // substituir pela busca no banco pois vai ser cadastrado pelo usuário
-    this.origemBoletins = [
-      { value: 1, descricao: 'RAI' },
-      { value: 2, descricao: 'TALONARIO' },
-      { value: 2, descricao: 'MANUAL' }
-
+  carregarStatus() {
+    // substituir pela busca no back enda que provavel ser um enum
+    this.status = [
+      { codigo: 1, descricao: 'Disponivel' },
+      { codigo: 2, descricao: 'Pendente' },
+      { codigo: 3, descricao: 'Resolvido' }
     ];
+  }
+  carregarMonta() {
+    // substituir pela busca no back enda que provavel ser um enum
+    this.montas = [
+      { codigo: 1, descricao: 'Pequena' },
+      { codigo: 2, descricao: 'Média' },
+      { codigo: 3, descricao: 'Grande' }
+    ];
+  }
+  carregarBarreira() {
+    // substituir pela busca no banco pois vai ser cadastrado pelo usuário
+    this.barreiras = [
+      { codigo: 1, descricao: 'G070', unidade: 1 },
+      { codigo: 2, descricao: 'GO060', unidade: 1 },
+      { codigo: 3, descricao: 'GO020', unidade: 2 }
+    ];
+  }
+
+  functionExigeProblema (status: number) {
+    console.log(status);
+    if (status === 2) {
+    this.exigeProblema = true;
+    }
   }
 
   salvar() {
@@ -99,14 +136,14 @@ export class BoletimCadastroComponent implements OnInit {
         origemBoletim: ['', Validators.required],
         data: ['',  Validators.required],
         emissorBo: ['', [Validators.required,  Validators.minLength(5), Validators.maxLength(6)]],
-        nomeEmissor: [''],
-        status: [''],
-        monta: [''],
-        vitima: [''],
-        autor: [''],
-        placa: [''],
+        nomeEmissor: [{value: '', disabled: true}],
+        status: ['', Validators.required],
+        monta: ['', Validators.required],
+        vitima: ['', [Validators.minLength(7), Validators.maxLength(250)]],
+        autor: ['', [Validators.minLength(7), Validators.maxLength(250)]],
+        placa: ['', [Validators.required,  Validators.minLength(7), Validators.maxLength(8)]],
         municipio: [''],
-        barreira: [''],
+        barreira: ['', Validators.required],
         problema: [''],
         solucao: [''],
         obs: [''],
@@ -125,8 +162,8 @@ export class BoletimCadastroComponent implements OnInit {
    //  this.title.setTitle(`Edição Lançamento: ${this.lancamento.descricao}`);
 }
 
-  editar(codigo: number) {
-    console.log(codigo);
+  editar(valor: number) {
+    console.log(valor);
   }
 
 }
