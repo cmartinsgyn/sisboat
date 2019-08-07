@@ -47,6 +47,7 @@ import { SharedModule } from 'app/shared/shared.module';
     MatRippleModule,
     MatFormFieldModule,
     MatInputModule,
+    MatFormFieldModule,
     MatSelectModule,
     MatTooltipModule,
     MatDatepickerModule,

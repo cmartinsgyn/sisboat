@@ -105,7 +105,7 @@
                 <div class="col-sm-4">
                 <mat-form-field>
                   <mat-label>Status</mat-label>
-                  <mat-select formControlName='status' (selectionChange)="functionExigeProblema(status.codigo)"
+                  <mat-select formControlName='status' 
                     [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
                     <mat-option *ngFor="let status of status" value="status.codigo">
                       {{ status.descricao}}</mat-option>
@@ -131,7 +131,7 @@
                 </div>
                 <div class="col-md-5">
                   <mat-form-field class="full-width">
-                    <input matInput placeholder="Nome da Vítima" type="text" formControlName="vitima"
+                    <input matInput placeholder="Nome da Vítima" type="text" formControlName='vitima'
                       [ngClass]="{ 'is-invalid': submitted && f.vitima.errors }" maxlength="250"/>
                   
                   <mat-error *ngIf="submitted && f.vitima.errors && f.vitima.errors.minlength">
@@ -142,7 +142,7 @@
                 </div>
                 <div class="col-md-5">
                     <mat-form-field class="full-width">
-                        <input matInput placeholder="Nome da Vítima" type="text" formControlName="autor"
+                        <input matInput placeholder="Nome da Vítima" type="text" formControlName='autor'
                           [ngClass]="{ 'is-invalid': submitted && f.autor.errors }" maxlength="250"/>
                       
                       <mat-error *ngIf="submitted && f.autor.errors && f.autor.errors.minlength">
@@ -156,7 +156,7 @@
               <div class="row">
                 <div class="col-md-2">
                   <mat-form-field class="full-width">
-                      <input matInput placeholder="Placa" type="text" formControlName="placa"
+                      <input matInput placeholder="Placa" type="text" formControlName='placa'
                       [ngClass]="{ 'is-invalid': submitted && f.placa.errors }" maxlength="8"/>
 
                       <mat-error *ngIf="submitted && f.placa.errors && f.placa.errors.required">
@@ -170,7 +170,8 @@
                 <div class="col-md-5">
                   <mat-form-field>
                     <mat-label>Municipio</mat-label>
-                    <mat-select #municipioT value="municipio">
+                    <mat-select formControlName='municipio'
+                       [ngClass]="{ 'is-invalid': submitted && f.barreira.errors }">
                       <mat-option value="Anapolis">Anápolis</mat-option>
                       <mat-option value="Goiania">Goiânia</mat-option>
                       <mat-option value="Sao Luiz">São Luíz dos Montes Belos</mat-option>
@@ -193,21 +194,21 @@
               <div class="row">
                 <div class="col-md-12">
                   <mat-form-field class="full-width">
-                    <textarea matInput placeholder="Problema"></textarea>
+                    <textarea matInput placeholder="Problema" formControlName='problema'></textarea>
                   </mat-form-field>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12" hidden>
                   <mat-form-field class="full-width">
-                    <textarea matInput placeholder="Solução"></textarea>
+                    <textarea matInput placeholder="Solução" formControlName='solucao'></textarea>
                   </mat-form-field>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-12">
                   <mat-form-field class="full-width">
-                    <textarea matInput placeholder="Observação"></textarea>
+                    <textarea matInput placeholder="Observação" formControlName='obs'></textarea>
                   </mat-form-field>
                 </div>
               </div>
@@ -226,7 +227,7 @@
             <div class="row">
               <div class="col-md-6">
                 <mat-form-field class="full-width">
-                  <input matInput [matDatepicker]="dataProvidencia" placeholder="Data">
+                  <input matInput type="text" [matDatepicker]="dataProvidencia" placeholder="Data"/>
                   <mat-datepicker-toggle matSuffix [for]="dataProvidencia"></mat-datepicker-toggle>
                   <mat-datepicker #dataProvidencia></mat-datepicker>
                 </mat-form-field>
@@ -242,7 +243,7 @@
             <div class="row">
               <div class="col-md-12">
                 <mat-form-field class="full-width">
-                  <textarea matInput placeholder="Providências"></textarea>
+                  <textarea matInput placeholder="Providências" formControlName='providencia'></textarea>
                 </mat-form-field>
               </div>
             </div>
