@@ -113,10 +113,10 @@ export class BoletimCadastroComponent implements OnInit {
         }
 
         // display caso seja sucesso
-        this.toastyService.success('Item cadastrado com sucesso!')
         console.log('SUCCESS!! :-)\n\n' + JSON.stringify(this.form.value, null, 4));
-       //  console.log(this.boletim.boletim);
-        this.form.reset();
+       //  console.log(this.boletim.boletim)
+        this.onReset();
+        this.toastyService.success('Item cadastrado com sucesso!')
     }
 
     onReset() {
@@ -148,9 +148,9 @@ export class BoletimCadastroComponent implements OnInit {
         solucao: [''],
         obs: [''],
 
-        // dataProvidencia: [''],
-        // envioDetran: [''],
-        // providencia: ['']
+        dataProvidencia: [''],
+        envioDetran: [''],
+        providencia: ['']
 
       }, {
         // validator: ValidacoesUtil.ValidaCpf
