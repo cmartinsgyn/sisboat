@@ -2,7 +2,7 @@ import { AbstractControl } from '@angular/forms';
 
 export class ValidacoesUtil {
   static ValidaCpf(controle: AbstractControl) {
-    const cpf = controle.get('nome').value;
+    const cpf = controle.get('boletim').value;
 
     let soma = 0;
     let resto: number;

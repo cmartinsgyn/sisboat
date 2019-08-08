@@ -8,6 +8,7 @@ import { ValidacoesUtil } from 'app/core/validacoes-util';
 import { Boletim } from 'app/core/model/boletim';
 import { BoletimService } from './../boletim.service';
 import { OrigemBoletimService } from 'app/cadastros/origem-boletim/origem-boletim.service';
+import { CrossFieldErrorMatcher } from 'app/core/cross-field-error-matcher';
 
 @Component({
   selector: 'app-boletim-cadastro',
@@ -16,9 +17,9 @@ import { OrigemBoletimService } from 'app/cadastros/origem-boletim/origem-boleti
 })
 export class BoletimCadastroComponent implements OnInit {
   /** define o paramêtro se está ou não em edição*/
-  // get editando() {
-  //   return Boolean(false);
-  // }
+  get editando() {
+    return Boolean(false);
+  }
 
  boletim = new Boletim();
  tiposBoletins = [];
@@ -29,7 +30,8 @@ export class BoletimCadastroComponent implements OnInit {
  exigeProblema: Boolean = false;
  form: FormGroup;
  submitted = false;
- bolMin = 7; bolMax = 9;
+ erro = new CrossFieldErrorMatcher();
+ bolMin = 11; bolMax = 15;
  dataAtual: any;
 
  constructor(
@@ -113,15 +115,17 @@ export class BoletimCadastroComponent implements OnInit {
         }
 
         // display caso seja sucesso
-        console.log('SUCCESS!! :-)\n\n' + JSON.stringify(this.form.value, null, 4));
+        this.toastyService.success('Item cadastrado com sucesso!');
+        alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.form.value, null, 4));
        //  console.log(this.boletim.boletim)
         this.onReset();
-        this.toastyService.success('Item cadastrado com sucesso!')
+
     }
 
     onReset() {
         this.submitted = false;
         this.form.reset();
+        this.criarFormulario();
     }
 
     criarFormulario() {
@@ -144,16 +148,16 @@ export class BoletimCadastroComponent implements OnInit {
         placa: ['', [Validators.required,  Validators.minLength(7), Validators.maxLength(8)]],
         municipio: [''],
         barreira: ['', Validators.required],
-        problema: [''],
-        solucao: [''],
-        obs: [''],
+        problema: ['', [Validators.minLength(7), Validators.maxLength(250)]],
+        solucao: ['', [Validators.minLength(7), Validators.maxLength(250)]],
+        obs: ['', [Validators.minLength(7), Validators.maxLength(250)]],
 
         dataProvidencia: [''],
         envioDetran: [''],
-        providencia: ['']
+        providencia: ['', [Validators.minLength(7), Validators.maxLength(250)]]
 
       }, {
-        // validator: ValidacoesUtil.ValidaCpf
+      validator: ValidacoesUtil.ValidaCpf
       }
       );
     }

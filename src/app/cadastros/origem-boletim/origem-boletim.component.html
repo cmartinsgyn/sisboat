@@ -33,10 +33,11 @@
                             <div class="text-center">
                             <button class="btn btn-danger pull-right">Salvar</button>
                             </div>
-
-                            <div>{{ form.value | json}}</div>
-                            <div>{{ form.valid | json }}</div>
-                            <div>{{ form.errors | json }}</div>
+                            
+                            <div>Valores: {{ form.value | json}}</div>
+                            <div>O form está valido? {{ form.valid | json }}</div>
+                            <div>Erros: {{ form.errors | json }}</div>
+           
                         </form>
                     </div>
                 </div>

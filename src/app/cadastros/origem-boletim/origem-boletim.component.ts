@@ -51,7 +51,7 @@ export class OrigemBoletimComponent implements OnInit {
 
         // display caso seja sucesso
         this.toastyService.success('Item cadastrado com sucesso!')
-        console.log('SUCCESS!! :-)\n\n' + JSON.stringify(this.form.value, null, 4));
+        alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.form.value, null, 4));
         this.form.reset();
     }
 
