@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
@@ -6,6 +6,8 @@ import { ToastyService } from 'ng2-toasty';
 
 import { ValidacoesUtil } from 'app/core/validacoes-util';
 import { Boletim } from 'app/core/model/boletim';
+import { BoletimService } from './../boletim.service';
+import { OrigemBoletimService } from 'app/cadastros/origem-boletim/origem-boletim.service';
 
 @Component({
   selector: 'app-boletim-cadastro',
@@ -14,9 +16,9 @@ import { Boletim } from 'app/core/model/boletim';
 })
 export class BoletimCadastroComponent implements OnInit {
   /** define o paramêtro se está ou não em edição*/
-  get editando() {
-    return Boolean(false);
-  }
+  // get editando() {
+  //   return Boolean(false);
+  // }
 
  boletim = new Boletim();
  tiposBoletins = [];
@@ -28,6 +30,7 @@ export class BoletimCadastroComponent implements OnInit {
  form: FormGroup;
  submitted = false;
  bolMin = 7; bolMax = 9;
+ dataAtual: any;
 
  constructor(
   private route: ActivatedRoute,
@@ -35,6 +38,7 @@ export class BoletimCadastroComponent implements OnInit {
   private router: Router,
   private title: Title,
   public fb: FormBuilder,
+  private origemBoletimService: OrigemBoletimService
  ) { }
 
   ngOnInit() {
@@ -56,11 +60,7 @@ export class BoletimCadastroComponent implements OnInit {
   get f() { return this.form.controls; }
 
   carregarTiposBoletim() {
-    // substituir pela busca no back enda que provavel ser um enum
-    this.tiposBoletins = [
-      { codigo: 1, descricao: 'BOC' },
-      { codigo: 2, descricao: 'BOAT' }
-    ];
+    this.tiposBoletins = this.origemBoletimService.carregarTiposBoletim();
   }
   carregarOrigemBoletim() {
   // substituir pela busca no banco pois vai ser cadastrado pelo usuário
@@ -105,7 +105,7 @@ export class BoletimCadastroComponent implements OnInit {
 
   salvar() {
     this.submitted = true;
-    this.boletim = this.form.value
+    // this.boletim = this.form.value
 
         // stop se formulário for inválido
         if (this.form.invalid) {
@@ -115,7 +115,7 @@ export class BoletimCadastroComponent implements OnInit {
         // display caso seja sucesso
         this.toastyService.success('Item cadastrado com sucesso!')
         console.log('SUCCESS!! :-)\n\n' + JSON.stringify(this.form.value, null, 4));
-        console.log(this.boletim.boletim);
+       //  console.log(this.boletim.boletim);
         this.form.reset();
     }
 
@@ -125,12 +125,12 @@ export class BoletimCadastroComponent implements OnInit {
     }
 
     criarFormulario() {
+      const dataAtual = new Date().toISOString().substring(0, 10);
       this.form = this.fb.group({
-        codigo: [{value: 1, disabled: true}],
-        pmsecao: [{value: 31355, disabled: true}],
-        nomepmsecao: [{value: 'Cláudio Martins da Silva', disabled: true}],
-        dataSys: [{value: new FormControl(new Date()), disabled: true}],
-        cpf: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(11)]],
+        codigo: new FormControl({value: '', disabled: true}),
+        pmsecao: new FormControl({value: 31355, disabled: true}, Validators.required),
+        nomepmsecao: new FormControl({value: 'Claudio Martins da Silva', disabled: true}, Validators.required),
+        dataSys: [dataAtual, {disabled: true}],
         boletim: ['', [Validators.required, Validators.minLength(this.bolMin), Validators.maxLength(this.bolMax)]],
         tipoBoletim: ['', Validators.required],
         origemBoletim: ['', Validators.required],
@@ -148,9 +148,9 @@ export class BoletimCadastroComponent implements OnInit {
         solucao: [''],
         obs: [''],
 
-        dataProvidencia: [''],
-        envioDetran: [''],
-        providencia: ['']
+        // dataProvidencia: [''],
+        // envioDetran: [''],
+        // providencia: ['']
 
       }, {
         // validator: ValidacoesUtil.ValidaCpf
@@ -162,8 +162,8 @@ export class BoletimCadastroComponent implements OnInit {
    //  this.title.setTitle(`Edição Lançamento: ${this.lancamento.descricao}`);
 }
 
-  editar(valor: number) {
-    console.log(valor);
+  editar(codigo: number) {
+    console.log(codigo);
   }
 
 }

@@ -1,5 +1,11 @@
 import { OrigemBo } from './origemBo';
 
+export class Barreira {
+    codigo: number;
+    barreira: string;
+    unidade: number;
+}
+
 export class Boletim {
     codigo: number;
     pmsecao: string;
@@ -16,7 +22,7 @@ export class Boletim {
     vitima: string;
     autor: string;
     placa: string;
-    municipio: string;
+    municipio = new Barreira();
     barreira: string;
     problema: string;
     solucao: string;
