@@ -1,7 +1,7 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <div class="card">
                     <div class="card-header card-header-danger">
                         <h4 class="card-title">Novo</h4>
@@ -19,20 +19,91 @@
                               <div class="col-md-7">
                                     <mat-form-field class="full-width">
                                         <input matInput placeholder="Nome" type="text" [errorStateMatcher]="erro" maxlength="250"
-                                        formControlName='nome' [ngClass]="{ 'is-invalid': submitted && f.nome.errors }"/>
-                                       <mat-error *ngIf="submitted && f.nome.errors && f.nome.errors.required">Nome é obrigatório</mat-error>
-                                       <mat-error *ngIf="submitted && f.nome.errors && f.nome.errors.minlength">
+                                        formControlName='nome' [ngClass]="{ 'is-invalid': f.nome.errors }"/>
+                                       <mat-error *ngIf="f.nome.errors && f.nome.errors.required">Nome é obrigatório</mat-error>
+                                       <mat-error *ngIf="f.nome.errors && f.nome.errors.minlength">
                                             Mínimo de {{ f.nome.errors?.minlength?.requiredLength }} caracteres!</mat-error>
-                                       <mat-error *ngIf="submitted && f.nome.errors && f.nome.errors.maxlength">
+                                       <mat-error *ngIf="f.nome.errors && f.nome.errors.maxlength">
                                                     Máximo de {{ f.nome.errors?.minlength?.requiredLength }} caracteres!</mat-error> 
-                                        <mat-error *ngIf="submitted && f.nome.errors && f.nome.errors.cpfInvalido">cpf inválido</mat-error>                       
+                                        <!-- <mat-error *ngIf="f.nome.errors && f.nome.errors.cpfInvalido">cpf inválido</mat-error>                        -->
                                     </mat-form-field>
                               </div>
+                              <div class="text-center">
+                                    <button class="btn btn-danger pull-right" [disabled]="!form.valid">Salvar</button>
+                              </div>     
+
                             </div>
-                            
-                            <div class="text-center">
-                            <button class="btn btn-danger pull-right">Salvar</button>
+ 
+                            <div class="row">
+                             <div class="container-fluid"  style="margin-top: 57px;"> 
+                                <div class="header col-md-10">
+                                    <mat-form-field>
+                                       <input matInput #filter (keyup)="applyFilter($event.target.value)" placeholder="Filtrar">
+                                           <button mat-icon-button matSuffix aria-label="clear" *ngIf="filter.value" (click)="filter.value=''; applyFilter('');">
+                                              <mat-icon>close</mat-icon>
+                                           </button>
+                                           <mat-icon matSuffix aria-label="clear" *ngIf="!filter.value">search</mat-icon>
+                                    </mat-form-field>       
+                                </div>
+
+
+                               <div class="tabela-container mat-elevation-z8">
+
+                                <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="table-hover">
+                                              <!-- Código -->
+                                                <ng-container matColumnDef="codigo">
+                                                    <th mat-header-cell *matHeaderCellDef>Código</th>
+                                                    <td mat-cell *matCellDef="let element">
+                                                         {{element.codigo}} </td>
+                                                </ng-container>
+                
+                                                <!-- Data Cadastro-->
+                                                <ng-container matColumnDef="data">
+                                                        <th mat-header-cell *matHeaderCellDef> Data </th>
+                                                        <td mat-cell *matCellDef="let element"> {{element.data}} </td>
+                                                </ng-container>
+                
+                                                <!-- Descrição -->
+                                                <ng-container matColumnDef="nome">
+                                                        <th mat-header-cell *matHeaderCellDef> Descrição </th>
+                                                        <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+                                                    </ng-container>
+                                            
+                                                <!-- Responsavel -->
+                                                <ng-container matColumnDef="responsavel">
+                                                    <th mat-header-cell *matHeaderCellDef> Responsável </th>
+                                                    <td mat-cell *matCellDef="let element"> {{element.responsavel}} </td>
+                                                </ng-container>
+                
+                                                <!-- Ação -->
+                                                <ng-container matColumnDef="acoes">
+                                                    <th mat-header-cell *matHeaderCellDef></th>
+                                                    <td mat-cell *matCellDef="let element" class="td-actions text-right"> 
+                                                                <button #editar mat-raised-button type="button" 
+                                                                 class="btn btn-primary btn-link btn-sm btn-just-icon" matTooltip="Editar" 
+                                                                  [routerLink]="['/cadastro-origem-boletim', element.codigo]">
+                                                                  <i class="material-icons">edit</i>
+                                                                </button>
+                                                                <button mat-raised-button type="button" (click)="openDialog(element)"
+                                                                class="btn btn-danger btn-link btn-sm btn-just-icon"  matTooltip="Excluir"
+                                                                [matTooltipPosition]="'above'">
+                                                                    <i class="material-icons">close</i>
+                                                                </button>
+                                                    </td>
+                                                </ng-container>
+                                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                                                </table>
+                                                <mat-paginator [pageSizeOptions]="[5, 20, 50]" showFirstLastButtons></mat-paginator>
+                                 </div>
+                                
+                                </div>
                             </div>
+                                                
+                                              
+                                      
+                                   
             
                         </form>
                     </div>

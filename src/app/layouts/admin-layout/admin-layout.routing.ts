@@ -17,13 +17,13 @@ export const AdminLayoutRoutes: Routes = [
          path: 'boletim-cadastro/:codigo',
          component: BoletimCadastroComponent
      }]},
-     //  {
-    // path: '',
-    // children: [ {
-    //   path: 'userprofile',
-    //   component: UserProfileComponent
-    // }]
-    // }, {
+     {
+       path: '',
+        children: [ {
+         path: 'cadastro-origem-boletim/:codigo',
+         component: OrigemBoletimComponent
+    }]},
+    // {
     //   path: '',
     //   children: [ {
     //     path: 'icons',
