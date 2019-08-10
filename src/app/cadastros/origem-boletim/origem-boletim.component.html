@@ -18,7 +18,7 @@
                               </div>
                               <div class="col-md-7">
                                     <mat-form-field class="full-width">
-                                        <input matInput placeholder="Nome" type="text" [errorStateMatcher]="erro"
+                                        <input matInput placeholder="Nome" type="text" [errorStateMatcher]="erro" maxlength="250"
                                         formControlName='nome' [ngClass]="{ 'is-invalid': submitted && f.nome.errors }"/>
                                        <mat-error *ngIf="submitted && f.nome.errors && f.nome.errors.required">Nome é obrigatório</mat-error>
                                        <mat-error *ngIf="submitted && f.nome.errors && f.nome.errors.minlength">
@@ -33,11 +33,7 @@
                             <div class="text-center">
                             <button class="btn btn-danger pull-right">Salvar</button>
                             </div>
-                            
-                            <div>Valores: {{ form.value | json}}</div>
-                            <div>O form está valido? {{ form.valid | json }}</div>
-                            <div>Erros: {{ form.errors | json }}</div>
-           
+            
                         </form>
                     </div>
                 </div>

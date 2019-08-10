@@ -4,7 +4,6 @@ import { Title } from '@angular/platform-browser';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ToastyService } from 'ng2-toasty';
 
-import { ValidacoesUtil } from 'app/core/validacoes-util';
 import { Boletim } from 'app/core/model/boletim';
 import { BoletimService } from './../boletim.service';
 import { OrigemBoletimService } from 'app/cadastros/origem-boletim/origem-boletim.service';
@@ -21,7 +20,7 @@ export class BoletimCadastroComponent implements OnInit {
     return Boolean(false);
   }
 
- boleti = new Boletim();
+ boletim = new Boletim();
  tiposBoletins = [];
  origemBoletins = [];
  status = [];
@@ -52,7 +51,6 @@ export class BoletimCadastroComponent implements OnInit {
     this.carregarMonta();
     this.carregarBarreira();
     this.criarFormulario();
-    
 
     // if (codigo) {
     //   this.editar(codigo);
@@ -108,7 +106,7 @@ export class BoletimCadastroComponent implements OnInit {
 
   salvar() {
     this.submitted = true;
-    // this.boletim = this.form.value
+    this.boletim = this.form.value;
 
         // stop se formulário for inválido
         if (this.form.invalid) {
@@ -118,7 +116,7 @@ export class BoletimCadastroComponent implements OnInit {
         // display caso seja sucesso
         this.toastyService.success('Item cadastrado com sucesso!');
         alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.form.value, null, 4));
-       //  console.log(this.boletim.boletim)
+       console.log(this.boletim);
 
        this.onReset();
        // tslint:disable-next-line: no-unused-expression
