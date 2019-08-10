@@ -21,7 +21,7 @@ export class BoletimCadastroComponent implements OnInit {
     return Boolean(false);
   }
 
- boletim = new Boletim();
+ boleti = new Boletim();
  tiposBoletins = [];
  origemBoletins = [];
  status = [];
@@ -31,7 +31,7 @@ export class BoletimCadastroComponent implements OnInit {
  form: FormGroup;
  submitted = false;
  erro = new CrossFieldErrorMatcher();
- bolMin = 11; bolMax = 15;
+ bolMin = 9; bolMax = 9;
  dataAtual: any;
 
  constructor(
@@ -46,16 +46,17 @@ export class BoletimCadastroComponent implements OnInit {
   ngOnInit() {
     this.title.setTitle('Novo Boletim');
     const codigo = this.route.snapshot.params['codigo'];
-    this.criarFormulario();
     this.carregarTiposBoletim();
     this.carregarOrigemBoletim();
     this.carregarStatus();
     this.carregarMonta();
     this.carregarBarreira();
+    this.criarFormulario();
+    
 
-    if (codigo) {
-      this.editar(codigo);
-    }
+    // if (codigo) {
+    //   this.editar(codigo);
+    // }
   }
 
   // pegar campos do form
@@ -118,14 +119,17 @@ export class BoletimCadastroComponent implements OnInit {
         this.toastyService.success('Item cadastrado com sucesso!');
         alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.form.value, null, 4));
        //  console.log(this.boletim.boletim)
-        this.onReset();
+
+       this.onReset();
+       // tslint:disable-next-line: no-unused-expression
+       this.form.valid;
+
 
     }
 
     onReset() {
-        this.submitted = false;
-        this.form.reset();
-        this.criarFormulario();
+      this.form.reset();
+      this.submitted = false;
     }
 
     criarFormulario() {
@@ -134,8 +138,9 @@ export class BoletimCadastroComponent implements OnInit {
         codigo: new FormControl({value: '', disabled: true}),
         pmsecao: new FormControl({value: 31355, disabled: true}, Validators.required),
         nomepmsecao: new FormControl({value: 'Claudio Martins da Silva', disabled: true}, Validators.required),
-        dataSys: [dataAtual, {disabled: true}],
-        boletim: ['', [Validators.required, Validators.minLength(this.bolMin), Validators.maxLength(this.bolMax)]],
+        dataSys: [dataAtual, Validators.required],
+        boletim: ['', [Validators.required, Validators.minLength(this.bolMin),
+          Validators.maxLength(this.bolMax)]],
         tipoBoletim: ['', Validators.required],
         origemBoletim: ['', Validators.required],
         data: ['',  Validators.required],
@@ -145,7 +150,7 @@ export class BoletimCadastroComponent implements OnInit {
         monta: ['', Validators.required],
         vitima: ['', [Validators.minLength(7), Validators.maxLength(250)]],
         autor: ['', [Validators.minLength(7), Validators.maxLength(250)]],
-        placa: ['', [Validators.required,  Validators.minLength(7), Validators.maxLength(8)]],
+        placa: ['', [Validators.required,  Validators.minLength(7), Validators.maxLength(7)]],
         municipio: [''],
         barreira: ['', Validators.required],
         problema: ['', [Validators.minLength(7), Validators.maxLength(250)]],
@@ -157,9 +162,11 @@ export class BoletimCadastroComponent implements OnInit {
         providencia: ['', [Validators.minLength(7), Validators.maxLength(250)]]
 
       }, {
-      validator: ValidacoesUtil.ValidaCpf
+      //  updateOn: 'blur',
+       updateValueIfValid: true
       }
       );
+
     }
 
   atualizarTituloEdicao() {

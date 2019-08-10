@@ -63,9 +63,10 @@ export class OrigemBoletimComponent implements OnInit {
     criarFormulario() {
       this.form = this.fb.group({
         codigo: new FormControl({value: '', disabled: true}),
-        nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(11)]]
+        nome: ['', Validators.compose([Validators.required, Validators.minLength(2),
+          Validators.maxLength(11), ValidacoesUtil.ValidaCpf])]
       }, {
-        validator: ValidacoesUtil.ValidaCpf
+       // validator: ValidacoesUtil.ValidaCpf
       }
       );
     }

@@ -1,6 +1,6 @@
 <div class="main-content">
   <div class="container-fluid">
-   <form [formGroup]="form" autocomplete="off" (ngSubmit)="salvar();" novalidate>
+   <form [formGroup]="form" autocomplete="off" (ngSubmit)="salvar()">
 
     <div class="row">
       <div class="col-md-8">
@@ -20,9 +20,9 @@
                 <div class="col-sm-2">
                   <mat-form-field class="full-width">
                     <input matInput type="text" placeholder="Pm Seção" formControlName='pmsecao' 
-                    [ngClass]="{ 'is-invalid': submitted && f.pmsecao.errors }"/>
+                    [ngClass]="{ 'is-invalid': f.pmsecao.errors }"/>
 
-                    <mat-error *ngIf="submitted && f.pmsecao.errors && f.pmsecao.errors.required">
+                    <mat-error *ngIf=" f.pmsecao.errors && f.pmsecao.errors.required">
                       O sistema não conseguiu preencher a rg! Por favor faça logoff e reinicie</mat-error>
                   </mat-form-field>
                 </div>
@@ -30,9 +30,9 @@
                 <div class="col-sm-4">
                   <mat-form-field class="full-width">
                     <input matInput type="text" placeholder="Nome" formControlName='nomepmsecao'
-                    [ngClass]="{ 'is-invalid': submitted && f.nomepmsecao.errors }"/>
+                    [ngClass]="{ 'is-invalid': f.nomepmsecao.errors }"/>
 
-                    <mat-error *ngIf="submitted && f.nomepmsecao.errors && f.nomepmsecao.errors.required">
+                    <mat-error *ngIf=" f.nomepmsecao.errors && f.nomepmsecao.errors.required">
                       O sistema não conseguiu preencher o nome! Por favor faça logoff e reinicie</mat-error>
                   </mat-form-field>
                 </div>
@@ -47,39 +47,43 @@
                 <div class="col-md-4">
                   <mat-form-field class="full-width">
                     <input matInput type="text" placeholder="Nº Boletim" formControlName='boletim'
-                      [ngClass]="{ 'is-invalid': submitted && f.boletim.errors }" [errorStateMatcher]="erro"/>
-                    <mat-error *ngIf="submitted && f.boletim.errors && f.boletim.errors.required">
+                      [ngClass]="{ 'is-invalid': f.boletim.errors }"  pattern='^[0-9]+(\.[0-9]*){0,1}$' 
+                      [errorStateMatcher]="erro" maxlength="9">
+
+                    <mat-error *ngIf="f.boletim.errors && f.boletim?.errors.pattern">
+                      Ops! Só número é permitido.</mat-error>  
+                    <mat-error *ngIf="f.boletim.errors && f.boletim.errors.required">
                       Nº do Boletim é obrigatório!</mat-error>
-                    <mat-error *ngIf="submitted && f.boletim.errors && f.boletim.errors.minlength">
+                    <mat-error *ngIf="f.boletim.errors && f.boletim.errors.minlength">
                       Mínimo de {{ f.boletim.errors?.minlength?.requiredLength }} caracteres!</mat-error>
-                    <mat-error *ngIf="submitted && f.boletim.errors && f.boletim.errors.maxlength">
+                    <mat-error *ngIf="f.boletim.errors && f.boletim.errors.maxlength">
                       Máximo de {{ f.boletim.errors?.maxlength?.requiredLength }} caracteres!</mat-error>
 
 
-                      <mat-error *ngIf="submitted && form.errors && form.errors.cpfInvalido">cpf inválido</mat-error>
+                      <mat-error *ngIf="f.boletim.errors && f.boletim.errors.cpfInvalido">cpf inválido</mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-md-4">
                   <mat-form-field>
                     <mat-label>Tipo Boletim</mat-label>
-                    <mat-select formControlName='tipoBoletim'
-                      [ngClass]="{ 'is-invalid': submitted && f.tipoBoletim.errors }">
+                    <mat-select formControlName='tipoBoletim'  [errorStateMatcher]="erro"
+                       [ngClass]="{ 'is-invalid': f.tipoBoletim.errors }">
                       <mat-option *ngFor="let tiposBo of tiposBoletins" [value]="tiposBo">
                         {{ tiposBo.descricao}}</mat-option>
                     </mat-select>
-                    <mat-error *ngIf="submitted && f.tipoBoletim.errors && f.tipoBoletim.errors.required">
+                    <mat-error *ngIf="f.tipoBoletim.errors && f.tipoBoletim.errors.required">
                       Selecione o tipo de boletim! </mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-md-4">
                   <mat-form-field>
                     <mat-label>Origem Boletim</mat-label>
-                    <mat-select formControlName='origemBoletim'
-                      [ngClass]="{ 'is-invalid': submitted && f.origemBoletim.errors }">
+                    <mat-select formControlName='origemBoletim' [errorStateMatcher]="erro"
+                      [ngClass]="{ 'is-invalid': f.origemBoletim.errors }">
                       <mat-option *ngFor="let origemBo of origemBoletins" [value]="origemBo">
                         {{ origemBo.descricao }}</mat-option>
                     </mat-select>
-                    <mat-error *ngIf="submitted && f.origemBoletim.errors && f.origemBoletim.errors.required">
+                    <mat-error *ngIf=" f.origemBoletim.errors && f.origemBoletim.errors.required">
                       Selecione a origem do boletim! </mat-error>
                   </mat-form-field>
                 </div>
@@ -87,24 +91,26 @@
               <div class="row">
                 <div class="col-md-2">
                   <mat-form-field>
-                    <input matInput [matDatepicker]="picker" placeholder="Data" formControlName='data'>
+                    <input matInput [matDatepicker]="picker" placeholder="Data" 
+                    [errorStateMatcher]="erro" formControlName='data'>
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
 
-                    <mat-error *ngIf="submitted && f.data.errors && f.data.errors.required">
+                    <mat-error *ngIf=" f.data.errors && f.data.errors.required">
                         Selecione a data do boletim! </mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-md-2">
                   <mat-form-field class="full-width">
                     <input matInput type="text" placeholder="R.G Emissor BO" type="text" maxlength="5"
-                     formControlName='emissorBo' [ngClass]="{ 'is-invalid': submitted && f.emissorBo.errors }"/>
+                     formControlName='emissorBo'  [errorStateMatcher]="erro"
+                     [ngClass]="{ 'is-invalid': f.emissorBo.errors }"/>
                     
-                     <mat-error *ngIf="submitted && f.emissorBo.errors && f.emissorBo.errors.required">
+                     <mat-error *ngIf=" f.emissorBo.errors && f.emissorBo.errors.required">
                         Emissor do boletim é obrigatório!</mat-error>
-                     <mat-error *ngIf="submitted && f.emissorBo.errors && f.emissorBo.errors.minlength">
+                     <mat-error *ngIf=" f.emissorBo.errors && f.emissorBo.errors.minlength">
                             Mínimo de {{ f.emissorBo.errors?.minlength?.requiredLength }} caracteres!</mat-error>
-                     <mat-error *ngIf="submitted && f.emissorBo.errors && f.emissorBo.errors.maxlength">
+                     <mat-error *ngIf=" f.emissorBo.errors && f.emissorBo.errors.maxlength">
                             Máximo de {{ f.emissorBo.errors?.maxlength?.requiredLength }} caracteres!</mat-error>   
                   </mat-form-field>
                 </div>
@@ -118,12 +124,12 @@
                 <div class="col-sm-4">
                 <mat-form-field>
                   <mat-label>Status</mat-label>
-                  <mat-select formControlName='status' 
-                    [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
+                  <mat-select formControlName='status' [errorStateMatcher]="erro"
+                    [ngClass]="{ 'is-invalid': f.status.errors }">
                     <mat-option *ngFor="let status of status" [value]="status">
                       {{ status.descricao}}</mat-option>
                   </mat-select>
-                  <mat-error *ngIf="submitted && f.status.errors && f.status.errors.required">
+                  <mat-error *ngIf=" f.status.errors && f.status.errors.required">
                     Selecione o status do boletim! </mat-error>
                 </mat-form-field>
                 </div>
@@ -133,34 +139,36 @@
                 <div class="col-sm-2"> 
                  <mat-form-field>
                   <mat-label>Monta</mat-label>
-                  <mat-select formControlName='monta'
-                    [ngClass]="{ 'is-invalid': submitted && f.monta.errors }">
+                  <mat-select formControlName='monta' [errorStateMatcher]="erro"
+                    [ngClass]="{ 'is-invalid': f.monta.errors }">
                     <mat-option *ngFor="let monta of montas" [value]="monta">
                       {{ monta.descricao}}</mat-option>
                   </mat-select>
-                  <mat-error *ngIf="submitted && f.monta.errors && f.monta.required">
+                  <mat-error *ngIf=" f.monta.errors && f.monta.required">
                     Selecione a monta! </mat-error>
                 </mat-form-field>
                 </div>
                 <div class="col-md-5">
                   <mat-form-field class="full-width">
                     <input matInput placeholder="Nome da Vítima" type="text" formControlName='vitima'
-                      [ngClass]="{ 'is-invalid': submitted && f.vitima.errors }" maxlength="250"/>
+                    [errorStateMatcher]="erro" maxlength="250"
+                    [ngClass]="{ 'is-invalid': f.vitima.errors }" />
                   
-                  <mat-error *ngIf="submitted && f.vitima.errors && f.vitima.errors.minlength">
+                    <mat-error *ngIf=" f.vitima.errors && f.vitima.errors.minlength">
                       Mínimo de {{ f.vitima.errors?.minlength?.requiredLength }} caracteres!</mat-error>
-                  <mat-error *ngIf="submitted && f.vitima.errors && f.vitima.errors.maxlength">
+                    <mat-error *ngIf=" f.vitima.errors && f.vitima.errors.maxlength">
                       Máximo de {{ f.vitima.errors?.maxlength?.requiredLength }} caracteres!</mat-error>
                   </mat-form-field>    
                 </div>
                 <div class="col-md-5">
                     <mat-form-field class="full-width">
                         <input matInput placeholder="Nome da Vítima" type="text" formControlName='autor'
-                          [ngClass]="{ 'is-invalid': submitted && f.autor.errors }" maxlength="250"/>
+                          [ngClass]="{ 'is-invalid': f.autor.errors }" [errorStateMatcher]="erro" 
+                          maxlength="250"/>
                       
-                      <mat-error *ngIf="submitted && f.autor.errors && f.autor.errors.minlength">
+                      <mat-error *ngIf=" f.autor.errors && f.autor.errors.minlength">
                           Mínimo de {{ f.autor.errors?.minlength?.requiredLength }} caracteres!</mat-error>
-                      <mat-error *ngIf="submitted && f.autor.errors && f.autor.errors.maxlength">
+                      <mat-error *ngIf=" f.autor.errors && f.autor.errors.maxlength">
                           Máximo de {{ f.autor.errors?.maxlength?.requiredLength }} caracteres!</mat-error>
                    </mat-form-field>      
                 </div>
@@ -169,22 +177,25 @@
               <div class="row">
                 <div class="col-md-2">
                   <mat-form-field class="full-width">
-                      <input matInput placeholder="Placa" type="text" formControlName='placa'
-                      [ngClass]="{ 'is-invalid': submitted && f.placa.errors }" maxlength="8"/>
+                      <input matInput placeholder="Placa" type="text" formControlName='placa' 
+                      pattern='^[A-Z]{3}[0-9]{4}$' maxlength="7"
+                      [ngClass]="{ 'is-invalid': f.placa.errors }" [errorStateMatcher]="erro"/>
 
-                      <mat-error *ngIf="submitted && f.placa.errors && f.placa.errors.required">
-                        Placa é obritagatória!</mat-error>
-                      <mat-error *ngIf="submitted && f.placa.errors && f.placa.errors.minlength">
+                      <mat-error *ngIf="f.placa.errors && f.placa.errors.required">
+                          Placa é obrigatória!</mat-error>
+                      <mat-error *ngIf="f.placa.errors && f.placa?.errors.pattern">
+                          Quase lá! Tente algo como AAA0000.</mat-error>  
+                      <!-- <mat-error *ngIf="f.placa.errors && f.placa.errors.minlength">
                           Mínimo de {{ f.placa.errors?.minlength?.requiredLength }} caracteres!</mat-error>
-                      <mat-error *ngIf="submitted && f.placa.errors && f.placa.errors.maxlength">
-                          Máximo de {{ f.placa.errors?.maxlength?.requiredLength }} caracteres!</mat-error>
+                      <mat-error *ngIf="f.placa.errors && f.placa.errors.maxlength">
+                          Máximo de {{ f.placa.errors?.maxlength?.requiredLength }} caracteres!</mat-error> -->
                   </mat-form-field>
                 </div>
                 <div class="col-md-5">
                   <mat-form-field>
                     <mat-label>Municipio</mat-label>
-                    <mat-select formControlName='municipio'
-                       [ngClass]="{ 'is-invalid': submitted && f.barreira.errors }">
+                    <mat-select formControlName='municipio' [errorStateMatcher]="erro" 
+                       [ngClass]="{ 'is-invalid': f.barreira.errors }">
                       <mat-option value="Anapolis">Anápolis</mat-option>
                       <mat-option value="Goiania">Goiânia</mat-option>
                       <mat-option value="Sao Luiz">São Luíz dos Montes Belos</mat-option>
@@ -194,12 +205,12 @@
                 <div class="col-md-5">
                     <mat-form-field>
                         <mat-label>Barreira</mat-label>
-                        <mat-select formControlName='barreira'
-                          [ngClass]="{ 'is-invalid': submitted && f.barreira.errors }">
+                        <mat-select formControlName='barreira' [errorStateMatcher]="erro" 
+                          [ngClass]="{ 'is-invalid': f.barreira.errors }">
                           <mat-option *ngFor="let barreira of barreiras" [value]="barreira">
                             {{ barreira.descricao }}</mat-option>
                         </mat-select>
-                        <mat-error *ngIf="submitted && f.barreira.errors && f.barreira.errors.required">
+                        <mat-error *ngIf=" f.barreira.errors && f.barreira.errors.required">
                           Selecione a Barreira! </mat-error>
                       </mat-form-field>
                 </div>
@@ -208,11 +219,12 @@
                 <div class="col-md-12">
                   <mat-form-field class="full-width">
                     <textarea matInput placeholder="Problema" formControlName='problema'
-                    [ngClass]="{ 'is-invalid': submitted && f.problema.errors }">
+                    [ngClass]="{ 'is-invalid': f.problema.errors }"
+                    [errorStateMatcher]="erro" >
                    
-                    <mat-error *ngIf="submitted && f.problema.errors && f.problema.errors.minlength">
+                    <mat-error *ngIf=" f.problema.errors && f.problema.errors.minlength">
                         Mínimo de {{ f.problema.errors?.minlength?.requiredLength }} caracteres!</mat-error>
-                    <mat-error *ngIf="submitted && f.problema.errors && f.problema.problema.maxlength">
+                    <mat-error *ngIf=" f.problema.errors && f.problema.problema.maxlength">
                         Máximo de {{ f.problema.errors?.maxlength?.requiredLength }} caracteres!</mat-error>            
                   </mat-form-field>
                   
@@ -232,7 +244,8 @@
                   </mat-form-field>
                 </div>
               </div>
-              <button class="btn btn-success pull-right">Salvar</button>
+              <button class="btn btn-success pull-right" [disabled]="!form.valid">Salvar</button>
+              <button class="btn btn-danger pull-left" (click)="onReset()">Cancelar</button>
           </div>
         </div>
       </div>
