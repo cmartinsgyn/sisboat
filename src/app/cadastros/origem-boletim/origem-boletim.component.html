@@ -4,7 +4,7 @@
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-header card-header-danger">
-                        <h4 class="card-title">Novo</h4>
+                        <h4 class="card-title">{{ editando ? 'Edição de ' : 'Nova'}} Origem Boletim</h4>
                         <p class="card-category"></p>
                     </div>
                     <div class="card-body">
@@ -16,7 +16,7 @@
                                    formControlName='codigo'>
                                 </mat-form-field>
                               </div>
-                              <div class="col-md-7">
+                              <div class="col-md-5">
                                     <mat-form-field class="full-width">
                                         <input matInput placeholder="Nome" type="text" [errorStateMatcher]="erro" maxlength="250"
                                         formControlName='nome' [ngClass]="{ 'is-invalid': f.nome.errors }"/>
@@ -28,12 +28,14 @@
                                         <!-- <mat-error *ngIf="f.nome.errors && f.nome.errors.cpfInvalido">cpf inválido</mat-error>                        -->
                                     </mat-form-field>
                               </div>
-                              <div class="text-center">
-                                    <button class="btn btn-danger pull-right" [disabled]="!form.valid">Salvar</button>
+                            </div>  
+                             <div class="row">
+                                <div class="col-md-10">
+                                <button class="btn btn-success pull-right" [disabled]="!form.valid">Salvar</button>
+                                <button class="btn btn-danger pull-left" (click)="onReset()">Cancelar</button>
+                            </div>
                               </div>     
 
-                            </div>
- 
                             <div class="row">
                              <div class="container-fluid"  style="margin-top: 57px;"> 
                                 <div class="header col-md-10">

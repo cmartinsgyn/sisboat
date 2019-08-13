@@ -1,6 +1,6 @@
 import { Component, Input} from '@angular/core';
 import { ToastyConfig } from 'ng2-toasty';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -16,7 +16,7 @@ export class AppComponent {
   constructor(
     private toastyConfig: ToastyConfig) {
       this.toastyConfig.theme = 'bootstrap';
-      this.toastyConfig.position = 'bottom-left';
+      this.toastyConfig.position = 'top-left';
     }
 
   }

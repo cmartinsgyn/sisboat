@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Validators, NgForm, FormGroup, FormBuilder, FormControl, } from '@angular/forms';
 import { ToastyService } from 'ng2-toasty';
 import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {MatTableDataSource} from '@angular/material/table';
@@ -45,20 +45,28 @@ export class OrigemBoletimComponent implements OnInit {
     private toastyService: ToastyService,
     public fb: FormBuilder,
     private router: Router,
+    private route: ActivatedRoute,
     public dialog: MatDialog
   ) { }
 
   ngOnInit() {
-    this.title.setTitle('Nova Origem Boletim');
-    this.criarFormulario();
     this.dataSource.paginator = this.paginator;
+
+    const codigoOrigemBo = this.route.snapshot.params['codigo'];
+
+    if (codigoOrigemBo) {
+      this.editar(codigoOrigemBo);
+    } else {
+      this.title.setTitle('Nova Origem Boletim');
+      this.criarFormulario();
+    }
 
   }
 
   /* FORM CADASTRO*/
  /** define o paramêtro se está ou não em edição*/
  get editando() {
-  return Boolean(false);
+  return Boolean(this.origem.codigo);
 }
 
   // pegar campos do form
@@ -73,30 +81,30 @@ export class OrigemBoletimComponent implements OnInit {
         }
 
         // display caso seja sucesso
+        this.origem = this.form.value;
         this.toastyService.success('Item cadastrado com sucesso!')
-        alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.form.value, null, 4));
+        alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.origem, null, 4));
         this.form.reset();
+        this.router.navigate(['/cadastro-origem-boletim']);
     }
 
     onReset() {
         this.submitted = false;
         this.form.reset();
+        this.router.navigate(['/cadastro-origem-boletim']);
+        // this.title.setTitle('Nova Origem Boletim');
     }
 
     criarFormulario() {
       this.form = this.fb.group({
-        codigo: new FormControl({value: '', disabled: true}),
-        nome: ['', Validators.compose([Validators.required, Validators.minLength(2),
+        codigo: [this.origem.codigo, {disabled: true}],
+        nome: [this.origem.nome, Validators.compose([Validators.required, Validators.minLength(2),
           Validators.maxLength(250)])]
       }, {
        // validator: ValidacoesUtil.ValidaCpf
       }
       );
     }
-
-  atualizarTituloEdicao() {
-   //  this.title.setTitle(`Edição Lançamento: ${this.lancamento.descricao}`);
-}
 
 openDialog(elemento: any): void {
   // tslint:disable-next-line: no-use-before-declare
@@ -106,15 +114,32 @@ openDialog(elemento: any): void {
 
   dialogRef.afterClosed().subscribe(result => {
     if (result === true) {
-      console.log(true)
       this.excluir(elemento);
     }
   });
 }
+
+editar(codigo: number) {
+// buscaPorCodigo()
+
+ this.origem.codigo = 1;
+ this.origem.data = '15/08/2019';
+ this.origem.nome = 'RAI';
+ this.origem.responsavel = 'Cláudio';
+ this.criarFormulario();
+ this.atualizarTituloEdicao();
+}
 /** chama o serviço para exclusão */
 excluir(elemento: any) {
-  console.log('Serviço Excluir item código ' + elemento.codigo);
+  // passa para o serviço (com o elemento.codigo) para buscar por codigo e excluir
+  this.origem = elemento; // substituir
+  alert('Item a excluir:!! :-)\n\n' + JSON.stringify(this.origem, null, 4));
+  this.toastyService.success(`Origem Boletim ${elemento.nome} Excluída com sucesso!`);
 
+}
+
+atualizarTituloEdicao() {
+  this.title.setTitle(`Edição de: ${this.origem.nome}`);
 }
 
 }
