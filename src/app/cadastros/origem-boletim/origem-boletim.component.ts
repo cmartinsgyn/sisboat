@@ -135,6 +135,7 @@ excluir(elemento: any) {
   this.origem = elemento; // substituir
   alert('Item a excluir:!! :-)\n\n' + JSON.stringify(this.origem, null, 4));
   this.toastyService.success(`Origem Boletim ${elemento.nome} Excluída com sucesso!`);
+  this.onReset();
 
 }
 

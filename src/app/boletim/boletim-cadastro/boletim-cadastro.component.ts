@@ -17,7 +17,7 @@ import { CrossFieldErrorMatcher } from 'app/core/cross-field-error-matcher';
 export class BoletimCadastroComponent implements OnInit {
   /** define o paramêtro se está ou não em edição*/
   get editando() {
-    return Boolean(false);
+    return Boolean(this.boletim.codigo);
   }
 
  boletim = new Boletim();
@@ -52,9 +52,11 @@ export class BoletimCadastroComponent implements OnInit {
     this.carregarBarreira();
     this.criarFormulario();
 
-    // if (codigo) {
-    //   this.editar(codigo);
-    // }
+    if (codigo) {
+      this.editar(codigo);
+    } else {
+      this.novo();
+    }
   }
 
   // pegar campos do form
@@ -128,18 +130,33 @@ export class BoletimCadastroComponent implements OnInit {
     onReset() {
       this.form.reset();
       this.submitted = false;
+      this.boletim = new Boletim();
+      this.title.setTitle('Novo Boletim');
+    }
+
+    novo () {
+      this.onReset();
+
+       // substituir pelas pesquisas user logado.
+       this.boletim.pmsecao = '31355';
+       this.boletim.nomepmsecao = 'Claudio Martins da Silva';
+
+       this.dataAtual = new Date().toISOString().substring(0, 10);
+       this.boletim.dataSys = this.dataAtual
+      this.criarFormulario();
+
     }
 
     criarFormulario() {
-      const dataAtual = new Date().toISOString().substring(0, 10);
+
       this.form = this.fb.group({
-        codigo: new FormControl({value: '', disabled: true}),
-        pmsecao: new FormControl({value: 31355, disabled: true}, Validators.required),
-        nomepmsecao: new FormControl({value: 'Claudio Martins da Silva', disabled: true}, Validators.required),
-        dataSys: [dataAtual, Validators.required],
-        boletim: ['', [Validators.required, Validators.minLength(this.bolMin),
+        codigo: new FormControl({value: this.boletim.codigo, disabled: true}),
+        pmsecao: new FormControl({value: this.boletim.pmsecao, disabled: true}, Validators.required),
+        nomepmsecao: new FormControl({value: this.boletim.nomepmsecao, disabled: true}, Validators.required),
+        dataSys: new FormControl({value: this.boletim.dataSys, disabled: true }, Validators.required),
+        boletim: [this.boletim.boletim, [Validators.required, Validators.minLength(this.bolMin),
           Validators.maxLength(this.bolMax)]],
-        tipoBoletim: ['', Validators.required],
+        tipoBoletim: [this.boletim.tipoBoletim, Validators.required],
         origemBoletim: ['', Validators.required],
         data: ['',  Validators.required],
         emissorBo: ['', [Validators.required,  Validators.minLength(5), Validators.maxLength(6)]],
@@ -167,12 +184,21 @@ export class BoletimCadastroComponent implements OnInit {
 
     }
 
-  atualizarTituloEdicao() {
-   //  this.title.setTitle(`Edição Lançamento: ${this.lancamento.descricao}`);
-}
-
   editar(codigo: number) {
-    console.log(codigo);
+   // buscar no back and pelo codigo(passando para o serviço)
+    this.boletim.codigo = codigo;
+    this.boletim.boletim = 123456;
+    this.boletim.tipoBoletim = 'BOAT';
+    this.boletim.pmsecao = '31355';
+    this.boletim.nomepmsecao = 'Claudio Martins da Silva';
+    // this.boletim.dataSys = '01/01/2001';
+
+    this.criarFormulario();
+    this.atualizarTituloEdicao();
   }
+
+  atualizarTituloEdicao() {
+    this.title.setTitle(`Edição do Boletim`);
+ }
 
 }

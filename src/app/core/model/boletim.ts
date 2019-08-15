@@ -10,9 +10,9 @@ export class Boletim {
     codigo: number;
     pmsecao: string;
     nomepmsecao: string;
-    dataSys: Date;
+    dataSys: Date; 
     boletim: number;
-    tipoBoletim: number;
+    tipoBoletim: string; // subst. pelo enum
     origemBoletim = new OrigemBo();
     data: Date;
     emissorBo: string;

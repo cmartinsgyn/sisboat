@@ -1,8 +1,8 @@
-<h1 mat-dialog-title>Excluir Boletim</h1>
+<h1 mat-dialog-title>Excluir Origem Boletim</h1>
 <div mat-dialog-content>
-  <p>Deseja realmente excluir o boletim?</p> 
+  <p>Deseja realmente excluir a origem do {{boletim.boletim}}?</p> 
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Obrigado</button>
+  <button mat-button (click)="onNoClick()">Não Obrigado</button>
   <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Ok</button>
 </div>

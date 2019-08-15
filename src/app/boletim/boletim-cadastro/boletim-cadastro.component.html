@@ -6,7 +6,7 @@
       <div class="col-md-8">
         <div class="card">
           <div class="card-header card-header-success">
-            <h4 class="card-title">Boletim de Acidente de Trânsito e de Ocorrência</h4>
+            <h4 class="card-title">{{ editando ? 'Ediçao de' : 'Novo Boletim'}} {{boletim.tipoBoletim}}</h4>
           </div>
           <div class="card-body">
             
@@ -245,7 +245,7 @@
                 </div>
               </div>
               <button class="btn btn-success pull-right" [disabled]="!form.valid">Salvar</button>
-              <button class="btn btn-danger pull-left" (click)="onReset()">Cancelar</button>
+              <button class="btn btn-danger pull-left" (click)="novo()">Cancelar</button>
           </div>
         </div>
       </div>
