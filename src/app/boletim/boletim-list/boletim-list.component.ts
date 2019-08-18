@@ -25,6 +25,7 @@ export class BoletimListComponent implements OnInit {
   expandedElement: Boletins | null;
   dados: string;
   exclui: boolean;
+  boletimExluir: any
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -46,8 +47,8 @@ export class BoletimListComponent implements OnInit {
 
   openDialog(elemento: any): void {
     // tslint:disable-next-line: no-use-before-declare
-    const dialogRef = this.dialog.open(ConfirmaExclusaoDialog, {
-      width: '350px'
+    const dialogRef = this.dialog.open(ConfirmaExclusaoBoletimDialog, {
+      width: '350px',
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -57,9 +58,10 @@ export class BoletimListComponent implements OnInit {
       }
     });
   }
+
   /** chama o serviço para exclusão */
   excluir(elemento: any) {
-    console.log('Serviço Excluir item código ' + elemento.codigo);
+    alert('Excluído boletim ' + elemento.boletim);
 
   }
 
@@ -77,14 +79,14 @@ export class Boletins {
 /*Confirmação de exclusão*/
 @Component({
   // tslint:disable-next-line: component-selector
-  selector: 'confirma-exclusao-dialog',
-  templateUrl: 'confirma-exclusao-dialog.html',
+  selector: 'confirma-exclusao-boletim-dialog',
+  templateUrl: 'confirma-exclusao-boletim-dialog.html',
 })
 // tslint:disable-next-line: component-class-suffix
-export class ConfirmaExclusaoDialog {
+export class ConfirmaExclusaoBoletimDialog {
 
   constructor(
-    public dialogRef: MatDialogRef<ConfirmaExclusaoDialog>
+    public dialogRef: MatDialogRef<ConfirmaExclusaoBoletimDialog>
   ) {}
 
   onNoClick(): void {

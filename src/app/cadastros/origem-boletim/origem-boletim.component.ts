@@ -13,7 +13,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { ValidacoesUtil } from 'app/core/validacoes-util';
 import { OrigemBo } from 'app/core/model/origemBo';
 import { CrossFieldErrorMatcher } from 'app/core/cross-field-error-matcher';
-import { ConfirmaExclusaoDialog } from 'app/boletim/boletim-list/boletim-list.component';
+// import { ConfirmaExclusaoDialog } from 'app/boletim/boletim-list/boletim-list.component';
 @Component({
   selector: 'app-origem-boletim',
   templateUrl: './origem-boletim.component.html',
@@ -108,7 +108,7 @@ export class OrigemBoletimComponent implements OnInit {
 
 openDialog(elemento: any): void {
   // tslint:disable-next-line: no-use-before-declare
-  const dialogRef = this.dialog.open(ConfirmaExclusaoDialog, {
+  const dialogRef = this.dialog.open(ConfirmaExclusaoOrigemDialog, {
     width: '350px'
   });
 
@@ -154,3 +154,21 @@ const LISTA: OrigemBo[] = [
   {codigo: 6, data: '09/07/2019', nome: 'OUTRO', responsavel: 'Fulano da Silva'},
   {codigo: 7, data: '10/07/2019', nome: 'OUTRO', responsavel: 'Cicrano de Assis'}
 ];
+
+/*Confirmação de exclusão*/
+@Component({
+  // tslint:disable-next-line: component-selector
+  selector: 'confirma-exclusao-origem-dialog',
+  templateUrl: 'confirma-exclusao-origem-dialog.html',
+})
+// tslint:disable-next-line: component-class-suffix
+export class ConfirmaExclusaoOrigemDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<ConfirmaExclusaoOrigemDialog>
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+}

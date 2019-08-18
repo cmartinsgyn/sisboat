@@ -11,8 +11,8 @@ import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { UserProfileComponent } from '../../user/user-profile/user-profile.component';
 import { UserNewpasswordComponent } from 'app/user/user-newpassword/user-newpassword.component';
 import { UserListComponent } from 'app/user/user-list/user-list.component';
-import { BoletimListComponent, ConfirmaExclusaoDialog } from '../../boletim/boletim-list/boletim-list.component';
-import { OrigemBoletimComponent } from 'app/cadastros/origem-boletim/origem-boletim.component';
+import { BoletimListComponent, ConfirmaExclusaoBoletimDialog } from '../../boletim/boletim-list/boletim-list.component';
+import { OrigemBoletimComponent, ConfirmaExclusaoOrigemDialog } from 'app/cadastros/origem-boletim/origem-boletim.component';
 
 import { DateFormat } from '../admin-layout/date-format';
 import {
@@ -66,7 +66,7 @@ import { SharedModule } from 'app/shared/shared.module';
     MatDialogModule,
     SharedModule
     ],
-    entryComponents: [ConfirmaExclusaoDialog],
+    entryComponents: [ConfirmaExclusaoBoletimDialog, ConfirmaExclusaoOrigemDialog],
 
   declarations: [
     DashboardComponent,
@@ -76,7 +76,8 @@ import { SharedModule } from 'app/shared/shared.module';
     UserListComponent,
     UserNewpasswordComponent,
     OrigemBoletimComponent,
-    ConfirmaExclusaoDialog
+    ConfirmaExclusaoBoletimDialog,
+    ConfirmaExclusaoOrigemDialog
 
    ],
   providers: [
