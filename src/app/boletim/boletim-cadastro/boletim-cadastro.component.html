@@ -144,8 +144,9 @@
                     <mat-option *ngFor="let monta of montas" [value]="monta">
                       {{ monta.descricao}}</mat-option>
                   </mat-select>
-                  <mat-error *ngIf=" f.monta.errors && f.monta.required">
-                    Selecione a monta! </mat-error>
+                  <!-- verificar porque não aceirta f.monta.required -->
+                  <mat-error *ngIf=" f.monta.errors && f.monta"> 
+                    Selecione a monta! </mat-error> 
                 </mat-form-field>
                 </div>
                 <div class="col-md-5">

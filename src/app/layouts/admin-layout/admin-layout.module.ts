@@ -77,7 +77,7 @@ import { SharedModule } from 'app/shared/shared.module';
     UserNewpasswordComponent,
     OrigemBoletimComponent,
     ConfirmaExclusaoBoletimDialog,
-    ConfirmaExclusaoOrigemDialog
+    ConfirmaExclusaoOrigemDialog,
 
    ],
   providers: [
